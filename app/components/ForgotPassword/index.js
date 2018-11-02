@@ -8,19 +8,29 @@ class ForgotPasswordPage extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        email = '',
+        email: '',
       };
     }
     handleTextFields = (textFieldObj) => {
-        const email = this.state.email;
-        email = textFieldObj.target.value;
-        this.setState({email})
+        this.setState({email: textFieldObj.target.value})
+    }
+    getPassword = () => {
+        axios.get('/api/forgotPassword',{
+            params: {
+                email: this.state.loginFields.email
+            }
+        }).then(function (response){
+            console.log(response.data);
+        }).catch(function (err){
+            console.log(err);
+        })
     }
     render() {
         return (
             <RenderForgotPasswordPage 
             emailValue={this.state.email}
             handleTextFieldFunc={this.handleTextFields}
+            getPasswordFunc={this.getPassword}
             />
         )
     }
