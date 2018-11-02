@@ -72,7 +72,7 @@ function renderLoginPage(props) {
               <TextField id="password" value={props.passwordValue} label={constants.passwordTextFieldLabel} type='password'></TextField>
             </form>
             <Button color="primary" variant="contained" onClick={props.loginFunc}>התחבר</Button>
-            <Link className={classes.links} to="/">שכחתי סיסמה</Link>
+            <Link className={classes.links} to={constants.linkToForgotPassword}>שכחתי סיסמה</Link>
           </div>
         </div>
     );

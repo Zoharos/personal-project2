@@ -8,19 +8,22 @@ class ForgotPasswordPage extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        
+        email = '',
       };
     }
-    handleTextFields = () => {
-        
+    handleTextFields = (textFieldObj) => {
+        const email = this.state.email;
+        email = textFieldObj.target.value;
+        this.setState({email})
     }
     render() {
         return (
             <RenderForgotPasswordPage 
-            
+            emailValue={this.state.email}
+            handleTextFieldFunc={this.handleTextFields}
             />
         )
     }
   }
 
-export default LoginPage;
+export default ForgotPasswordPage;
