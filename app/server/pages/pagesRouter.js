@@ -1,7 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const path = require('path');
+import * as express from 'express';
+import * as path from 'path';
 import routes from './routes';
+import * as R from 'ramda';
+
+const router = express.Router();
 router.use(express.json());
 
 router.get('/*', (req, res) => {

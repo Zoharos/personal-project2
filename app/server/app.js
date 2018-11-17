@@ -5,7 +5,9 @@ import mongoose from 'mongoose';
 import https from 'https';
 import fs from 'fs';
 import pagesRouter from './pagesRouter';
-import apiRouter from './api_router'
+import apiRouter from './api_router';
+import dotenv from 'dotenv';
+dotenv.config();
 
 //Encryption assests
 const privateKey  = fs.readFileSync('./app/server/encryption/localhost.key', 'utf8');
@@ -20,7 +22,7 @@ app.use(cors());
 app.use(assets);
 
 //Database connection
-const uri = "mongodb+srv://real-nadlan-users:z8LzAyjpdk4tXpOI@golancorporation-cyaxt.gcp.mongodb.net/Real-Nadlan?retryWrites=true";
+const uri = process.env.DB_CONNECTION_STRING;
 mongoose.connect(uri, {useNewUrlParser: true});
 
 //Every route with api

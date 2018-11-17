@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RenderLoginPage from './renderLoginPage';
 import { auth } from '../MaterialComponents';
@@ -45,7 +44,7 @@ class LoginPage extends React.Component {
         }
     }
     login = () => {
-        axios.get('/api/login',{
+        axios.get('https://localhost:8443/api/login',{
             headers: {
                 email: this.state.loginFields.email,
                 password: this.state.loginFields.password
