@@ -1,75 +1,86 @@
 import React from 'react';
-import axios from 'axios';
-import RenderLoginPage from './renderLoginPage';
-import { auth } from '../MaterialComponents';
+import { Link } from 'react-router-dom';
+import {withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import { Helmet } from 'react-helmet';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import * as constants from './constants';
 
-class LoginPage extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        registrationFields: {
-            regFirstName: '',
-            regLastName: '',
-            regEmail1: '',
-            regEmail2: '',
-            regPassword1: '',
-            regPassword2: ''
+function styles()  {
+    const theme = createMuiTheme({
+      palette: {
+        primary: {
+          main: '#2196f3',
         },
-        loginFields: {
-            email: '',
-            password:''
-        }
-      };
-    }
-    handleTextFields = (textFieldObj) => {
-        const loginFields = this.state.loginFields;
-        loginFields[textFieldObj.target.id] = textFieldObj.target.value;
-        this.setState({loginFields})
-    }
-    register = () => {
-        if((this.state.registrationFields.regEmail1 == this.state.registrationFields.regEmail2) || (this.state.registrationFields.regPassword1 == this.state.registrationFields.regPassword2))
-        {
-            axios.post('/api/login',{
-                    /* firstName: this.state.registrationFields.regFirstName,
-                    lastName: this.state.registrationFields.regLastName,
-                    email1: this.state.registrationFields.regEmail1,
-                    email2: this.state.registrationFields.regEmail2,
-                    password1: this.state.registrationFields.regPassword1,
-                    password2: this.state.registrationFields.regPassword2, */
-                    //token: JSON.parse(localStorage.getItem('token'))
-                })
-                .then(function (response) {
-                    console.log(response);
-            }) 
-        }
-    }
-    login = () => {
-        axios.get('https://localhost:8443/api/login',{
-            headers: {
-                email: this.state.loginFields.email,
-                password: this.state.loginFields.password
+      },
+    });
+      const styles = theme => ({
+          logoPadding: {
+            paddingLeft: '3%',
+            paddingTop: '2%',
+          },
+          headline: {
+            textAlign: 'center',
+            fontWeight: 500,
+          },
+          links: {
+            textDecoration: 'none',
+            color: 'dodgerblue',
+          },
+          textFieldsDecor: {
+            width: 300,
+            paddingLeft: '38%',
+            paddingTop: '1%',
+            '& Button': {
+              margin: 10,
             }
-        }).then(function (response){
-            console.log(response.data);
-            localStorage.setItem('token',JSON.stringify(response.data.token));
-            localStorage.setItem('email',JSON.stringify(response.data.email));
-            auth.authenticate();
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
-        }).catch(function (err){
-            console.log(err);
-        })
-    }
-    render() {
-
-        return (
-            <RenderLoginPage 
-            handleTextFieldFunc={this.handleTextFields}
-            emailValue={this.state.loginFields.email}
-            passwordValue={this.state.loginFields.password}
-            loginFunc={this.login}
-            />
-        )
-    }
+          },
+          textField: {
+            width: 'inherit',
+            margin: 10,
+            direction: 'rtl',
+            '& div': {
+              width: 'inherit',
+              marginBottom: 10,
+            },
+            '& label': {
+              right: 0,
+              left: 'auto',
+              transformOrigin: 'top right;',
+            }
+          },
+      });
+      return [styles,theme];
   }
 
-export default LoginPage;
+const Login = (props) => {
+    const { classes } = props;
+    return (
+        <div>
+          <Helmet>
+            <title>Real Nadlan | Login</title>
+          </Helmet>
+          <a href={constants.linkToPublicWebsite}><img className={classes.logoPadding} src="/statics/RealNadlanNavBlack.png"/></a>
+          <h1 className={classes.headline}>התחברות</h1>
+          <h3 className={classes.headline}>חדשים באתר? &nbsp; 
+            <Link className={classes.links} to={constants.linkToRegistration}>הירשמו עכשיו </Link>
+          </h3>
+          <div className={classes.textFieldsDecor}>
+            <form className={classes.textField} onChange={props.handleTextFieldFunc}>
+              <TextField id="email" value={props.emailValue} label={constants.userTextFieldLabel}></TextField>
+              <TextField id="password" value={props.passwordValue} label={constants.passwordTextFieldLabel} type='password'></TextField>
+            </form>
+            <Button color="primary" variant="contained" onClick={props.loginFunc}>התחבר</Button>
+            <Link className={classes.links} to={constants.linkToForgotPassword}>שכחתי סיסמה</Link>
+          </div>
+        </div>
+    );
+}
+
+export default withStyles(styles()[0])(Login);
+
+
+//------------------description------------------
+//props.handleTextField - change the states of the text field values in index.
+//props.emailValue - the state of email in index
+//props.emailValue - the state of password in index

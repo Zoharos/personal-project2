@@ -4,16 +4,14 @@ import {
     Route,
     Switch
 } from 'react-router-dom';
-import List from './List';
+import List from './components/List';
 import { Helmet } from 'react-helmet';
-import Login from './Login/index';
-import ForgotPassword from './ForgotPassword/index';
-import Estate from './Estate';
-import { PrivateRoute } from './MaterialComponents';
+import Login from './components/Login';
+import ForgotPassword from './components/ForgotPassword';
+import Estate from './components/Estate';
+import { PrivateRoute } from './components/MaterialComponents';
 
-
-export default function App(props) {
-
+const App = (props) => {
     return (
         <div className="imgbox">
             <Helmet>
@@ -27,3 +25,4 @@ export default function App(props) {
         </div>
     )
 };
+export default App;

@@ -8,23 +8,10 @@ import {
 } from '@material-ui/core/styles';
 import {BrowserRouter as Router } from 'react-router-dom';
 
-import App from './components/App';
+import App from './App';
 import staticImports from './imports.js';
 
-class Main extends React.Component {
-    // Remove the server-side injected CSS.
-    componentDidMount() {
-      const jssStyles = document.getElementById('jss-server-side');
-      if (jssStyles && jssStyles.parentNode) {
-        jssStyles.parentNode.removeChild(jssStyles);
-      }
-    }
-  
-    render() {
-      return <App />
-    }
-  }
-  const theme = createMuiTheme({
+const theme = createMuiTheme({
     palette: {
         primary: {
           main: '#2196f3',
@@ -32,15 +19,28 @@ class Main extends React.Component {
     },
 });
 
-    const generateClassName = createGenerateClassName();
-
-ReactDOM.render((
-    <Router>
-        <JssProvider generateClassName={generateClassName}>
+class Main extends React.Component {
+    // Remove the server-side injected CSS.
+/*     componentDidMount() {
+      const jssStyles = document.getElementById('jss-server-side');
+      if (jssStyles && jssStyles.parentNode) {
+        jssStyles.parentNode.removeChild(jssStyles);
+      }
+    } */
+  
+render() {
+    return (
+        <Router>
             <MuiThemeProvider theme={theme}>
-                <Main />
+                <App />
             </MuiThemeProvider>
-        </JssProvider>
-    </Router>), 
-    document.getElementById('root')
-);
+        </Router>
+      )
+    }
+}
+
+//const generateClassName = createGenerateClassName();
+
+//<JssProvider generateClassName={generateClassName}>
+//</JssProvider>
+ReactDOM.render(<Main />,document.getElementById('root'));

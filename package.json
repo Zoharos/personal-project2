@@ -11,7 +11,7 @@
     "start": "npm run build:prod && NODE_ENV=production node ./build/server/index.js",
     "start:nodemon": "nodemon ./build/server/index.js",
     "start:dev": "parallelshell 'npm run build:watch' 'npm run build:watch:client' 'nodemon ./build/server/index.js'",
-    "test": "jest --watch --coverage"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -40,7 +40,6 @@
     "@babel/preset-react": "^7.0.0",
     "@material-ui/core": "^3.1.1",
     "@material-ui/icons": "^3.0.1",
-    "auth0-js": "^9.8.1",
     "axios": "^0.18.0",
     "babel-plugin-styled-components": "^1.8.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -52,6 +51,7 @@
     "dotenv": "^6.1.0",
     "express": "^4.16.3",
     "file-loader": "^2.0.0",
+    "firebase": "^5.5.9",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.0",
     "ramda": "^0.25.0",
