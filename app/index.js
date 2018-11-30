@@ -14,8 +14,11 @@ import staticImports from './imports.js';
 const theme = createMuiTheme({
     palette: {
         primary: {
-          main: '#2196f3',
+          main: '#155fa0',
        },
+       secondary: {
+           main: '#ff9800'
+       }
     },
 });
 
