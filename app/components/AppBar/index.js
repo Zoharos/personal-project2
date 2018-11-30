@@ -13,8 +13,8 @@ const styles = theme => ({
   root: {
     width: '100%',
   },
-  grow: {
-    flexGrow: 1,
+  navLogo: {
+    height: 70,
   },
   search: {
     position: 'relative',
@@ -51,9 +51,9 @@ const styles = theme => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      width: 120,
+      width: 150,
       '&:focus': {
-        width: 200,
+        width: 250,
       },
     },
   },
@@ -65,11 +65,10 @@ function NavBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <div className={classes.grow} />
-          <img src="/statics/logo.png" />
+          <img src="/statics/logo.png" className={classes.navLogo}/>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon />
+              <SearchIcon color="secondary"/>
             </div>
             <InputBase
               placeholder="Search…"
