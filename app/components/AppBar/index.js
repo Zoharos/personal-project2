@@ -2,11 +2,10 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
 const styles = theme => ({
@@ -14,7 +13,8 @@ const styles = theme => ({
     width: '100%',
   },
   navLogo: {
-    height: 70,
+    height: 85,
+    marginRight: '4%',
   },
   search: {
     position: 'relative',
@@ -47,14 +47,13 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
-    transition: theme.transitions.create('width'),
+    paddingLeft: theme.spacing.unit * 2,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      width: 150,
-      '&:focus': {
-        width: 250,
-      },
+      width: 350,
+/*       '&:focus': {
+        width: 300,
+      }, */
     },
   },
 });
@@ -67,9 +66,6 @@ function NavBar(props) {
         <Toolbar>
           <img src="/statics/logo.png" className={classes.navLogo}/>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon color="secondary"/>
-            </div>
             <InputBase
               placeholder="Search…"
               classes={{
@@ -78,6 +74,9 @@ function NavBar(props) {
               }}
             />
           </div>
+          <Button color="secondary">
+              <SearchIcon />
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

@@ -196,7 +196,7 @@ function LoginDialogBar(props)
               <IconButton color="inherit" onClick={props.close} aria-label="close">
                 <CloseIcon />
               </IconButton>
-              <Typography variant="headline" color="inherit" className={classes.flex}>התחברות</Typography>
+              <Typography variant="h1" color="inherit" className={classes.flex}>התחברות</Typography>
             </Toolbar>
           </AppBar>
           <div className="loginDiv">
@@ -218,7 +218,7 @@ function LoginDialogBar(props)
               <IconButton color="inherit" onClick={props.close} aria-label="close">
                 <CloseIcon />
               </IconButton>
-              <Typography variant="headline" color="inherit" className={classes.flex}>הרשמה</Typography>
+              <Typography variant="h1" color="inherit" className={classes.flex}>הרשמה</Typography>
             </Toolbar>
           </AppBar>
           <div className="loginDiv">
@@ -303,7 +303,7 @@ class MiniDrawer extends React.Component {
             >
               { this.state.open ? <ChevronRightIcon /> : <MenuIcon /> }
             </IconButton>
-            <Typography variant="headline" color="inherit" noWrap>
+            <Typography variant="h1" color="inherit" noWrap>
               Mini variant drawer
             </Typography>
           </Toolbar>
@@ -349,7 +349,7 @@ class HomePageCard extends React.Component {
             title={this.props.cardImageTitle}
           />
           <CardContent>
-            <Typography gutterBottom variant="headline" component="h2">
+            <Typography gutterBottom variant="h2" component="h2">
               {this.props.title}
             </Typography>
             <Typography component="p">
