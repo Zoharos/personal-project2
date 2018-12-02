@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RenderForgotPasswordPage from './renderForgotPasswordPage';
-import { auth } from '../MaterialComponents';
+import { auth } from '../../MaterialComponents';
 
 class ForgotPasswordPage extends React.Component {
     constructor(props) {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from "react-router-dom";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -7,14 +8,30 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
+import * as constants from './constants';
 
 const styles = theme => ({
   root: {
     width: '100%',
   },
+  noUnderline: {
+    textDecoration: 'none',
+  },
   navLogo: {
     height: 85,
     marginRight: '4%',
+  },
+  arrowDropDown: {
+    float: 'right',
+    height: 20,
+  },
+  bottomNavBar: {
+    float: 'right',
+    paddingTop: 50,
+  },
+  bottomNavBarButton: {
+    fontSize: '0.700rem',
   },
   search: {
     position: 'relative',
@@ -50,7 +67,7 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 2,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      width: 350,
+      width: 700,
 /*       '&:focus': {
         width: 300,
       }, */
@@ -64,19 +81,29 @@ function NavBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <img src="/statics/logo.png" className={classes.navLogo}/>
-          <div className={classes.search}>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-            />
+            <img src="/statics/logo.png" className={classes.navLogo}/>
+            <div className={classes.search}>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+              />
+            </div>
+            <Button color="secondary">
+                <SearchIcon />
+            </Button>
+          <div className={classes.bottomNavBar}>
+            <div>
+              <NavLink to={constants.loginPath} className={classes.noUnderline}>
+                <Button color="secondary" className={classes.bottomNavBarButton}>
+                  Hi, sign in
+                  <ArrowDropDown className={classes.arrowDropDown}/>
+                </Button>
+              </NavLink>
+            </div>
           </div>
-          <Button color="secondary">
-              <SearchIcon />
-          </Button>
         </Toolbar>
       </AppBar>
     </div>

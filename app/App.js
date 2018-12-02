@@ -4,11 +4,10 @@ import {
     Route,
     Switch
 } from 'react-router-dom';
-import List from './components/List';
 import { Helmet } from 'react-helmet';
-import Home from './components/Home';
-import Login from './components/Login';
-import ForgotPassword from './components/ForgotPassword';
+import Home from './components/PageComponents/Home';
+import Login from './components/PageComponents/Login';
+import ForgotPassword from './components/PageComponents/ForgotPassword';
 import Estate from './components/Estate';
 import { PrivateRoute } from './components/MaterialComponents';
 
@@ -20,6 +19,7 @@ const App = (props) => {
             </Helmet>
             <Switch>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
                 <Route exact path="/forgotPassword" component={ForgotPassword} />
                 <PrivateRoute exact path="/estate" component={Estate} />
             </Switch>

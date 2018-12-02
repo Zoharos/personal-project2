@@ -1,66 +1,56 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { Helmet } from 'react-helmet';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import * as constants from './constants';
 
-function styles()  {
-    const theme = createMuiTheme({
-      palette: {
-        primary: {
-          main: '#2196f3',
-        },
+const styles = theme => ({
+    logoPadding: {
+      paddingLeft: '3%',
+      paddingTop: '2%',
+    },
+    headline: {
+      textAlign: 'center',
+      fontWeight: 500,
+    },
+    links: {
+      textDecoration: 'none',
+      color: 'dodgerblue',
+    },
+    textFieldsDecor: {
+      width: 300,
+      paddingLeft: '38%',
+      paddingTop: '1%',
+      '& Button': {
+        margin: 10,
+      }
+    },
+    textField: {
+      width: 'inherit',
+      margin: 10,
+      direction: 'rtl',
+      '& div': {
+        width: 'inherit',
+        marginBottom: 10,
       },
-    });
-      const styles = theme => ({
-          logoPadding: {
-            paddingLeft: '3%',
-            paddingTop: '2%',
-          },
-          headline: {
-            textAlign: 'center',
-            fontWeight: 500,
-          },
-          links: {
-            textDecoration: 'none',
-            color: 'dodgerblue',
-          },
-          textFieldsDecor: {
-            width: 300,
-            paddingLeft: '38%',
-            paddingTop: '1%',
-            '& Button': {
-              margin: 10,
-            }
-          },
-          textField: {
-            width: 'inherit',
-            margin: 10,
-            direction: 'rtl',
-            '& div': {
-              width: 'inherit',
-              marginBottom: 10,
-            },
-            '& label': {
-              right: 0,
-              left: 'auto',
-              transformOrigin: 'top right;',
-            }
-          },
-      });
-      return [styles,theme];
-  }
+      '& label': {
+        right: 0,
+        left: 'auto',
+        transformOrigin: 'top right;',
+      }
+    },
+});
 
 const Login = (props) => {
     const { classes } = props;
     return (
         <div>
           <Helmet>
-            <title>Real Nadlan | Login</title>
+            <title>CoBuy | Login</title>
           </Helmet>
-          <a href={constants.linkToPublicWebsite}><img className={classes.logoPadding} src="/statics/RealNadlanNavBlack.png"/></a>
+          <a href={constants.linkToPublicWebsite}><img className={classes.logoPadding} src="/statics/blackLogo.png"/></a>
           <h1 className={classes.headline}>התחברות</h1>
           <h3 className={classes.headline}>חדשים באתר? &nbsp; 
             <Link className={classes.links} to={constants.linkToRegistration}>הירשמו עכשיו </Link>
@@ -77,7 +67,7 @@ const Login = (props) => {
     );
 }
 
-export default withStyles(styles()[0])(Login);
+export default withStyles(styles)(Login);
 
 
 //------------------description------------------
