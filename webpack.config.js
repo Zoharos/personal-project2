@@ -37,7 +37,8 @@ module.exports = {
         path.resolve(__dirname, "app")
       ],
       exclude: [
-       path.resolve(__dirname, "node_modules")
+       path.resolve(__dirname, "node_modules"),
+       path.resolve(__dirname, "__tests__")
       ],
       loader: 'babel-loader'
      }

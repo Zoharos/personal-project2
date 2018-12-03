@@ -21,7 +21,7 @@ const styles = theme => ({
     },
     textFieldsDecor: {
       width: 300,
-      paddingLeft: '38%',
+      paddingLeft: '41%',
       paddingTop: '1%',
       '& Button': {
         margin: 10,

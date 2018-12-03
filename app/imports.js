@@ -6,3 +6,4 @@ const navLogoB = require('./statics/RealNadlanNavBlack.png');
 const saleCardImg = require('./statics/sale-sign.jpg');
 const rentCardImg = require('./statics/rent-sign.jpg');
 const logo = require('./statics/logo.png');
+const blackLogo = require('./statics/blackLogo.png');

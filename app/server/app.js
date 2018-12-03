@@ -4,8 +4,8 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import https from 'https';
 import fs from 'fs';
-import pagesRouter from './pagesRouter';
-import apiRouter from './api_router';
+import pagesRouter from './pages/pagesRouter';
+import apiRouter from './api/api_router';
 import dotenv from 'dotenv';
 dotenv.config();
 
