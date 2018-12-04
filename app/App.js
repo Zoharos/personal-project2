@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Home from './components/PageComponents/Home';
-import Login from './components/PageComponents/Login';
+import Login from './containers/Login';
 import ForgotPassword from './components/PageComponents/ForgotPassword';
 import Estate from './components/Estate';
 import { PrivateRoute } from './components/MaterialComponents';

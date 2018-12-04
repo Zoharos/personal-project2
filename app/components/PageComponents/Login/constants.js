@@ -1,5 +1,5 @@
 const linkToRegistration = '/';
-const linkToPublicWebsite = 'localhost:3000';
+const linkToPublicWebsite = 'https://localhost:3000';
 const linkToForgotPassword = '/forgotPassword';
 const passwordTextFieldLabel = 'Password';
 const userTextFieldLabel = 'Email';
