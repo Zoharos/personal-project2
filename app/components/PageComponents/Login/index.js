@@ -14,6 +14,11 @@ const styles = theme => ({
     headline: {
       textAlign: 'center',
       fontWeight: 500,
+      margin: 'auto',
+    },
+    secondaryHeadline: {
+      textAlign: 'center',
+      fontWeight: 500,
     },
     links: {
       textDecoration: 'none',
@@ -21,13 +26,14 @@ const styles = theme => ({
     },
     textFieldsDecor: {
       width: 300,
-      paddingLeft: '41%',
-      paddingTop: '1%',
+      margin: 'auto',
+      textAlign: 'center',
       '& Button': {
         margin: 10,
-      }
+        width: 'inherit'
+      },
     },
-    textField: {
+    rtlTextField: {
       width: 'inherit',
       margin: 10,
       direction: 'rtl',
@@ -41,6 +47,14 @@ const styles = theme => ({
         transformOrigin: 'top right;',
       }
     },
+    ltrTextField: {
+      width: 'inherit',
+      margin: 10,
+      '& div': {
+        width: 'inherit',
+        marginBottom: 10,
+      },
+    },
 });
 
 const Login = (props) => {
@@ -51,17 +65,17 @@ const Login = (props) => {
             <title>CoBuy | Login</title>
           </Helmet>
           <a href={constants.linkToPublicWebsite}><img className={classes.logoPadding} src="/statics/blackLogo.png"/></a>
-          <h1 className={classes.headline}>התחברות</h1>
-          <h3 className={classes.headline}>חדשים באתר? &nbsp; 
-            <Link className={classes.links} to={constants.linkToRegistration}>הירשמו עכשיו </Link>
-          </h3>
+          <h1 className={classes.headline}>Sign in</h1>
+          <h4 className={classes.secondaryHeadline}>New to Cobuy? &nbsp; 
+            <Link className={classes.links} to={constants.linkToRegistration}>Create an account</Link>
+          </h4>
           <div className={classes.textFieldsDecor}>
-            <form className={classes.textField} onChange={props.handleTextFieldFunc}>
+            <form className={classes.ltrTextField} onChange={props.handleTextFieldFunc}>
               <TextField id="email" value={props.emailValue} label={constants.userTextFieldLabel}></TextField>
               <TextField id="password" value={props.passwordValue} label={constants.passwordTextFieldLabel} type='password'></TextField>
             </form>
-            <Button color="primary" variant="contained" onClick={props.loginFunc}>התחבר</Button>
-            <Link className={classes.links} to={constants.linkToForgotPassword}>שכחתי סיסמה</Link>
+            <Button color="secondary" variant="contained" onClick={props.loginFunc}>Sign in</Button>
+            <Link className={classes.links} to={constants.linkToForgotPassword}>Forgot password</Link>
           </div>
         </div>
     );

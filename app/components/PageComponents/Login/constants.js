@@ -1,8 +1,8 @@
 const linkToRegistration = '/';
-const linkToPublicWebsite = 'localhost:8443';
+const linkToPublicWebsite = 'localhost:3000';
 const linkToForgotPassword = '/forgotPassword';
-const passwordTextFieldLabel = 'סיסמא';
-const userTextFieldLabel = 'דואר אלקטרוני';
+const passwordTextFieldLabel = 'Password';
+const userTextFieldLabel = 'Email';
 
 
 export {

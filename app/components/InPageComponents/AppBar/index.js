@@ -31,7 +31,7 @@ const styles = theme => ({
     paddingTop: 50,
   },
   bottomNavBarButton: {
-    fontSize: '0.700rem',
+    fontSize: '0.800rem',
   },
   search: {
     position: 'relative',
