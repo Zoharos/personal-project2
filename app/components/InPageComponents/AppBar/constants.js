@@ -1,1 +1,1 @@
-export const loginPath = "/login";
+export const loginRoute ="/login";

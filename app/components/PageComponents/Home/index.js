@@ -1,11 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { Helmet } from 'react-helmet';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import AppBar from '../../InPageComponents/AppBar';
-import * as constants from './constants';
+import { siteTitle } from '../../../constants';
 
 const styles = theme => ({
     logoPadding: {
@@ -49,7 +46,7 @@ const Home = (props) => {
     return (
         <div>
           <Helmet>
-            <title>CoBuy</title>
+            <title>{siteTitle}</title>
           </Helmet>
           <AppBar />
         </div>

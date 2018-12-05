@@ -4,7 +4,15 @@ import { withStyles } from '@material-ui/core/styles';
 import { Helmet } from 'react-helmet';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import * as constants from './constants';
+import { blackLogo } from '../../../imports';
+import { homeRoute } from '../../../constants';
+import { 
+  registerRoute,
+  forgotPasswordRoute,
+  passwordLabel,
+  emailLabel,
+  pageTitle
+} from './constants'
 
 const styles = theme => ({
     logoPadding: {
@@ -62,20 +70,20 @@ const Login = (props) => {
     return (
         <div>
           <Helmet>
-            <title>CoBuy | Login</title>
+            <title>{pageTitle}</title>
           </Helmet>
-          <a href={constants.linkToPublicWebsite}><img className={classes.logoPadding} src="/statics/blackLogo.png"/></a>
+          <a href={homeRoute}><img className={classes.logoPadding} src={blackLogo}/></a>
           <h1 className={classes.headline}>Sign in</h1>
           <h4 className={classes.secondaryHeadline}>New to Cobuy? &nbsp; 
-            <Link className={classes.links} to={constants.linkToRegistration}>Create an account</Link>
+            <Link className={classes.links} to={registerRoute}>Create an account</Link>
           </h4>
           <div className={classes.textFieldsDecor}>
             <form className={classes.ltrTextField} onChange={props.handleTextFieldFunc}>
-              <TextField id="email" value={props.emailValue} label={constants.userTextFieldLabel}></TextField>
-              <TextField id="password" value={props.passwordValue} label={constants.passwordTextFieldLabel} type='password'></TextField>
+              <TextField id="email" value={props.emailValue} label={emailLabel}></TextField>
+              <TextField id="password" value={props.passwordValue} label={passwordLabel} type='password'></TextField>
             </form>
             <Button color="secondary" variant="contained" onClick={props.loginFunc}>Sign in</Button>
-            <Link className={classes.links} to={constants.linkToForgotPassword}>Forgot password</Link>
+            <Link className={classes.links} to={forgotPasswordRoute}>Forgot password</Link>
           </div>
         </div>
     );

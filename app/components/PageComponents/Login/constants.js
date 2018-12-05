@@ -1,14 +1,7 @@
-const linkToRegistration = '/';
-const linkToPublicWebsite = 'https://localhost:3000';
-const linkToForgotPassword = '/forgotPassword';
-const passwordTextFieldLabel = 'Password';
-const userTextFieldLabel = 'Email';
+import { siteTitle } from '../../../constants';
 
-
-export {
-    linkToRegistration, 
-    passwordTextFieldLabel,
-    userTextFieldLabel,
-    linkToPublicWebsite,
-    linkToForgotPassword,
-};
+export const registerRoute = '/';
+export const forgotPasswordRoute = '/forgotPassword';
+export const passwordLabel = 'Password';
+export const emailLabel = 'Email';
+export const pageTitle = siteTitle + " | Login"

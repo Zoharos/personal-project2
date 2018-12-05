@@ -9,7 +9,8 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
-import * as constants from './constants';
+import { logo } from '../../../imports';
+import { loginRoute } from './constants';
 
 const styles = theme => ({
   root: {
@@ -81,7 +82,7 @@ function NavBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-            <img src="/statics/logo.png" className={classes.navLogo}/>
+            <img src={logo} className={classes.navLogo}/>
             <div className={classes.search}>
               <InputBase
                 placeholder="Search…"
@@ -96,7 +97,7 @@ function NavBar(props) {
             </Button>
           <div className={classes.bottomNavBar}>
             <div>
-              <NavLink to={constants.loginPath} className={classes.noUnderline}>
+              <NavLink to={loginRoute} className={classes.noUnderline}>
                 <Button color="secondary" className={classes.bottomNavBarButton}>
                   Hi, sign in
                   <ArrowDropDown className={classes.arrowDropDown}/>
