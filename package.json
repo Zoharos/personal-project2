@@ -9,8 +9,8 @@
     "build:watch:client": "webpack --config ./webpack.config.js/ --watch",
     "build:prod": "npm run build && npm run build:client",
     "start": "npm run build:prod && NODE_ENV=production node ./build/server/index.js",
-    "start:nodemon": "nodemon ./build/server/index.js",
-    "start:node": "node ./build/server/index.js",
+    "start:nodemon": "nodemon ./server/index.js",
+    "start:node": "node ./server/index.js",
     "start:dev": "parallelshell 'npm run build:watch' 'npm run build:watch:client' 'nodemon ./build/server/index.js'",
     "test": "jest"
   },
@@ -44,8 +44,7 @@
     "react-router-dom": "^4.3.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.1.9"
+    "webpack-cli": "^3.1.1"
   },
   "devDependencies": {},
   "repository": {
