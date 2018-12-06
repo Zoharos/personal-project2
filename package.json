@@ -46,7 +46,9 @@
     "style-loader": "^0.23.1",
     "webpack": "^4.20.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack-cli": "^3.1.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Zoharos/personal-project2.git"
