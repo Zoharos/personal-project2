@@ -6,7 +6,7 @@ import {
 import { Helmet } from 'react-helmet';
 import Home from './components/PageComponents/Home';
 import Login from './containers/Login';
-import ForgotPassword from './components/PageComponents/ForgotPassword';
+import ForgotPassword from './containers/ForgotPassword';
 import { PrivateRoute } from './components/MaterialComponents';
 
 const App = (props) => {

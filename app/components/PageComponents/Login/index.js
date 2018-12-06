@@ -5,14 +5,8 @@ import { Helmet } from 'react-helmet';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { blackLogo } from '../../../imports';
-import { homeRoute } from '../../../constants';
-import { 
-  registerRoute,
-  forgotPasswordRoute,
-  passwordLabel,
-  emailLabel,
-  pageTitle
-} from './constants'
+import { rootRoute, registerRoute, forgotPasswordRoute } from '../../../constants';
+import { passwordLabel, emailLabel, pageTitle, signinLabel, subHeadLabel, createAccountlabel, forgotLabel } from './constants'
 
 const styles = theme => ({
     logoPadding: {
@@ -72,18 +66,18 @@ const Login = (props) => {
           <Helmet>
             <title>{pageTitle}</title>
           </Helmet>
-          <a href={homeRoute}><img className={classes.logoPadding} src={blackLogo}/></a>
-          <h1 className={classes.headline}>Sign in</h1>
-          <h4 className={classes.secondaryHeadline}>New to Cobuy? &nbsp; 
-            <Link className={classes.links} to={registerRoute}>Create an account</Link>
+          <Link to={rootRoute}><img className={classes.logoPadding} src={blackLogo}/></Link>
+          <h1 className={classes.headline}>{signinLabel}</h1>
+          <h4 className={classes.secondaryHeadline}>{subHeadLabel} &nbsp; 
+            <Link className={classes.links} to={registerRoute}>{createAccountlabel}</Link>
           </h4>
           <div className={classes.textFieldsDecor}>
             <form className={classes.ltrTextField} onChange={props.handleTextFieldFunc}>
               <TextField id="email" value={props.emailValue} label={emailLabel}></TextField>
               <TextField id="password" value={props.passwordValue} label={passwordLabel} type='password'></TextField>
             </form>
-            <Button color="secondary" variant="contained" onClick={props.loginFunc}>Sign in</Button>
-            <Link className={classes.links} to={forgotPasswordRoute}>Forgot password</Link>
+            <Button color="secondary" variant="contained" onClick={props.loginFunc}>{signinLabel}</Button>
+            <Link className={classes.links} to={forgotPasswordRoute}>{forgotLabel}</Link>
           </div>
         </div>
     );

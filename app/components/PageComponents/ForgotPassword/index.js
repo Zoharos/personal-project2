@@ -1,39 +1,88 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
-import RenderForgotPasswordPage from './renderForgotPasswordPage';
-import { auth } from '../../MaterialComponents';
+import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import { Helmet } from 'react-helmet';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { rootRoute, loginRoute } from '../../../constants';
+import { blackLogo } from '../../../imports';
+import {
+  pageTitle,
+  headline,
+  submitLabel,
+  emailLabel,
+  backLabel
+} from './constants';
 
-class ForgotPasswordPage extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        email: '',
-      };
+const styles = theme => ({
+  logoPadding: {
+    paddingLeft: '3%',
+    paddingTop: '2%',
+  },
+  headline: {
+    textAlign: 'center',
+    fontWeight: 500,
+  },
+  links: {
+    textDecoration: 'none',
+    color: 'dodgerblue',
+  },
+  textFieldsDecor: {
+    width: 300,
+    margin: 'auto',
+    textAlign: 'center',
+    '& Button': {
+      margin: 10,
+      width: 'inherit'
+    },
+  },
+  rtlTextField: {
+    width: 'inherit',
+    margin: 10,
+    direction: 'rtl',
+    '& div': {
+      width: 'inherit',
+      marginBottom: 10,
+    },
+    '& label': {
+      right: 0,
+      left: 'auto',
+      transformOrigin: 'top right;',
     }
-    handleTextFields = (textFieldObj) => {
-        this.setState({email: textFieldObj.target.value})
+  },
+  ltrTextField: {
+    width: 'inherit',
+    margin: 10,
+    '& div': {
+      width: 'inherit',
+      marginBottom: 10,
     }
-    getPassword = () => {
-        axios.get('/api/forgotPassword',{
-            params: {
-                email: this.state.loginFields.email
-            }
-        }).then(function (response){
-            console.log(response.data);
-        }).catch(function (err){
-            console.log(err);
-        })
-    }
-    render() {
-        return (
-            <RenderForgotPasswordPage 
-            emailValue={this.state.email}
-            handleTextFieldFunc={this.handleTextFields}
-            getPasswordFunc={this.getPassword}
-            />
-        )
-    }
-  }
+  },
+});
 
-export default ForgotPasswordPage;
+const ForgotPassword = (props) => {
+    const { classes } = props;
+    return (
+        <div>
+          <Helmet>
+            <title>{pageTitle}</title>
+          </Helmet>
+          <Link to={rootRoute}><img className={classes.logoPadding} src={blackLogo}/></Link>
+          <h1 className={classes.headline}>{headline}</h1>
+          <div className={classes.textFieldsDecor}>
+            <form onChange={props.handleTextFieldFunc} className={classes.ltrTextField}>
+              <TextField id="email" value={props.emailValue} label={emailLabel}></TextField>
+            </form>
+            <Button color="secondary" variant="contained">{submitLabel}</Button>
+            <Link className={classes.links} to={loginRoute}>{backLabel}</Link>
+          </div>
+        </div>
+    );
+}
+
+export default withStyles(styles)(ForgotPassword);
+
+//------------------description------------------
+//props.handleTextField - change the states of the text field values in index.
+//props.emailValue - the state of email in index
+//props.emailValue - the state of password in index

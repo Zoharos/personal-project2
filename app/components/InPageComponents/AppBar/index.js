@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { logo } from '../../../imports';
-import { loginRoute } from './constants';
+import { loginRoute } from '../../../constants';
 
 const styles = theme => ({
   root: {

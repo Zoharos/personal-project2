@@ -7,7 +7,7 @@ import Login from '../../components/PageComponents/Login';
 import { auth } from '../../components/MaterialComponents';
 import { loginApi } from './constants';
 
-class LoginPage extends React.Component {
+class LoginContainer extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -80,4 +80,4 @@ function matchDispatchToProps(dispatch) {
     return bindActionCreators({session: session}, dispatch);
 }
 
-export default connect(matchDispatchToProps)(LoginPage);
+export default connect(matchDispatchToProps)(LoginContainer);
