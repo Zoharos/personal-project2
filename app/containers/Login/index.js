@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { session } from '../../actions'
 import Login from '../../components/PageComponents/Login';
 import { auth } from '../../components/MaterialComponents';
 import { loginApi } from './constants';
@@ -71,6 +74,10 @@ class LoginPage extends React.Component {
             />
         )
     }
-  }
+}
 
-export default LoginPage;
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({session: session}, dispatch);
+}
+
+export default connect(matchDispatchToProps)(LoginPage);

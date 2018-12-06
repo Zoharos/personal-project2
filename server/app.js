@@ -31,8 +31,8 @@ app.get(/^((?!api).)*$/, pagesRouter);
 
 //https connection
 const httpsServer = https.createServer(credentials,app, () => {
-    console.log('Listening HTTPs')
+    console.log('Listening HTTPs');
   });
-httpsServer.listen(3000, "0.0.0.0");
+httpsServer.listen(3000);
 
 module.exports = app;

@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
     Route,
     Switch
 } from 'react-router-dom';
@@ -8,7 +7,6 @@ import { Helmet } from 'react-helmet';
 import Home from './components/PageComponents/Home';
 import Login from './containers/Login';
 import ForgotPassword from './components/PageComponents/ForgotPassword';
-import Estate from './components/Estate';
 import { PrivateRoute } from './components/MaterialComponents';
 
 const App = (props) => {
@@ -21,7 +19,7 @@ const App = (props) => {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/forgotPassword" component={ForgotPassword} />
-                <PrivateRoute exact path="/estate" component={Estate} />
+                {/* <PrivateRoute exact path="/estate" component={Estate} /> */}
             </Switch>
         </div>
     )

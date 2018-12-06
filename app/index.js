@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import JssProvider from 'react-jss/lib/JssProvider';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from './reducers';
 import {
   MuiThemeProvider,
-  createMuiTheme,
-  createGenerateClassName,
+  createMuiTheme
 } from '@material-ui/core/styles';
 import {BrowserRouter as Router } from 'react-router-dom';
-
 import App from './App';
-import staticImports from './imports.js';
 
 const theme = createMuiTheme({
     palette: {
@@ -22,28 +21,16 @@ const theme = createMuiTheme({
     },
 });
 
-class Main extends React.Component {
-    // Remove the server-side injected CSS.
-/*     componentDidMount() {
-      const jssStyles = document.getElementById('jss-server-side');
-      if (jssStyles && jssStyles.parentNode) {
-        jssStyles.parentNode.removeChild(jssStyles);
-      }
-    } */
-  
-render() {
+const Main = () => {
+    const store = createStore(reducers);
     return (
         <Router>
             <MuiThemeProvider theme={theme}>
-                <App />
+                <Provider store={store}>
+                    <App />
+                </Provider> 
             </MuiThemeProvider>
         </Router>
-      )
-    }
+    )
 }
-
-//const generateClassName = createGenerateClassName();
-
-//<JssProvider generateClassName={generateClassName}>
-//</JssProvider>
 ReactDOM.render(<Main />,document.getElementById('root'));
