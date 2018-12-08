@@ -23,14 +23,15 @@ const theme = createMuiTheme({
 
 const Main = () => {
     const store = createStore(reducers);
+    console.log(process.env.FIREBASE_API_KEY);
     return (
         <Router>
             <MuiThemeProvider theme={theme}>
                 <Provider store={store}>
-                    <App />
+                        <App />
                 </Provider> 
             </MuiThemeProvider>
         </Router>
     )
-}
+};
 ReactDOM.render(<Main />,document.getElementById('root'));
