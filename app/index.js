@@ -23,7 +23,6 @@ const theme = createMuiTheme({
 
 const Main = () => {
     const store = createStore(reducers);
-    console.log(process.env.FIREBASE_API_KEY);
     return (
         <Router>
             <MuiThemeProvider theme={theme}>

@@ -30,6 +30,8 @@ const styles = theme => ({
   bottomNavBar: {
     float: 'right',
     paddingTop: 50,
+    width: '100%',
+    display: '-webkit-flex'
   },
   bottomNavBarButton: {
     fontSize: '0.800rem',
