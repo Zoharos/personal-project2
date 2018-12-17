@@ -8,6 +8,7 @@ import {
   createMuiTheme
 } from '@material-ui/core/styles';
 import {BrowserRouter as Router } from 'react-router-dom';
+import Firebase, { FirebaseProvider } from './components/firebase'
 import App from './App';
 
 const theme = createMuiTheme({
@@ -27,7 +28,9 @@ const Main = () => {
         <Router>
             <MuiThemeProvider theme={theme}>
                 <Provider store={store}>
+                    <FirebaseProvider value={new Firebase()}>
                         <App />
+                    </FirebaseProvider>
                 </Provider> 
             </MuiThemeProvider>
         </Router>

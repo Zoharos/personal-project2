@@ -1,0 +1,1 @@
+export const signInButton = "Hi, sign in";

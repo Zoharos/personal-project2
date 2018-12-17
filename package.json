@@ -12,7 +12,7 @@
     "start:nodemon": "nodemon ./server/index.js",
     "start:node": "node ./server/index.js",
     "start:dev": "parallelshell 'npm run build:watch' 'npm run build:watch:client' 'nodemon ./build/server/index.js'",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "dependencies": {
     "@material-ui/core": "^3.6.1",
@@ -32,11 +32,14 @@
     "express": "^4.16.4",
     "file-loader": "^2.0.0",
     "firebase": "^5.7.0",
+    "firebase-admin": "^6.4.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.3.14",
+    "node-sass": "^4.11.0",
     "nodemon": "^1.18.7",
+    "pacman-react": "0.0.1",
     "ramda": "^0.26.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -44,6 +47,7 @@
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
+    "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.20.2"
   },

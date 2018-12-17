@@ -10,11 +10,31 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { logo } from '../../../imports';
-import { loginRoute } from '../../../constants';
+import { loginRoute, siteTheme } from '../../../constants';
+import { signInButton } from './constants';
 
 const styles = theme => ({
   root: {
     width: '100%',
+    zIndex: 1100,
+    boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)'
+  },
+  searchNav: {
+    width: '50%',
+    float: 'left',
+    boxShadow: 'none'
+  },
+  darkScreen: {
+    display: 'block',
+    width: '100%',
+    height: '100%',
+    zIndex: 0,
+    background: 'rgba(0, 0, 0, 0.5)',
+    position: 'absolute',
+    left: 0,
+    marginTop: 35,
+    opacity: 0,
+    transition: '0s'
   },
   noUnderline: {
     textDecoration: 'none',
@@ -28,13 +48,25 @@ const styles = theme => ({
     height: 20,
   },
   bottomNavBar: {
-    float: 'right',
     paddingTop: 50,
-    width: '100%',
-    display: '-webkit-flex'
+    width: '50%',
+    display: '-webkit-flex',
+    backgroundColor: siteTheme.primary,
+    height: 35
   },
   bottomNavBarButton: {
     fontSize: '0.800rem',
+  },
+  loginNav: {
+    '&:hover + $darkScreen': {
+      opacity: 1,
+      transitionDelay: '0.5s',
+      // display: 'block'
+    }
+  },
+  loginMenu: {
+    paddingLeft: '49.8%',
+    display: 'block',
   },
   search: {
     position: 'relative',
@@ -78,11 +110,11 @@ const styles = theme => ({
   },
 });
 
-function NavBar(props) {
+const NavBar = (props) => {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.searchNav}>
         <Toolbar>
             <img src={logo} className={classes.navLogo}/>
             <div className={classes.search}>
@@ -97,18 +129,23 @@ function NavBar(props) {
             <Button color="secondary">
                 <SearchIcon />
             </Button>
-          <div className={classes.bottomNavBar}>
-            <div>
+        </Toolbar>
+      </AppBar>
+      <div className={classes.bottomNavBar}>
+            <div className={classes.loginNav}>
               <NavLink to={loginRoute} className={classes.noUnderline}>
                 <Button color="secondary" className={classes.bottomNavBarButton}>
-                  Hi, sign in
+                  {signInButton}
                   <ArrowDropDown className={classes.arrowDropDown}/>
                 </Button>
               </NavLink>
+              {/* <div className={classes.loginMenu}>
+                <Button color="secondary">Sign in</Button>
+                <Button color="secondary">Sign up</Button>
+            </div> */}
             </div>
-          </div>
-        </Toolbar>
-      </AppBar>
+            <div className={classes.darkScreen}></div>
+      </div>
     </div>
   );
 }
