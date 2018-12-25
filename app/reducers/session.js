@@ -1,8 +1,12 @@
-export default function (state = null, action) {
+import {initialState} from './constants'
+
+
+export default function (state = {}, action) {
     switch (action.type) {
         case 'USER_LOGGED_IN':
-            return action.payload;
+            return { ...state, user: action.user}
             break;
+        default: 
+            return state;
     }
-    return state;
 }

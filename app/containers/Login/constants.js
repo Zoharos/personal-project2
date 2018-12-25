@@ -1,3 +1,3 @@
-import { apiRoute } from '../../constants';
+import { apiURL } from '../../constants';
 
-export const loginApi = apiRoute + "login";
+export const loginApi = apiURL + "login";

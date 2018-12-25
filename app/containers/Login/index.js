@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { session } from '../../actions'
 import Login from '../../components/PageComponents/Login';
 import { auth } from '../../components/MaterialComponents';
 import { loginApi } from './constants';
+import to from 'await-to-js';
 
 class LoginContainer extends React.Component {
     constructor(props) {
@@ -47,37 +47,37 @@ class LoginContainer extends React.Component {
             }) 
         }
     }
-    login = () => {
-        axios.get(loginApi,{
+    login = async () => {
+        const [err, response] = await to(axios.get(loginApi,{
             headers: {
                 email: this.state.loginFields.email,
                 password: this.state.loginFields.password
             }
-        }).then(function (response){
-            console.log(response.data);
-            localStorage.setItem('token',JSON.stringify(response.data.token));
-            localStorage.setItem('email',JSON.stringify(response.data.email));
-            auth.authenticate();
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
-        }).catch(function (err){
-            console.log(err);
-        })
+        }));
+        console.log(response.data);
+        localStorage.setItem('token',JSON.stringify(response.data.token));
+        localStorage.setItem('email',JSON.stringify(response.data.email));
+        auth.authenticate();
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
     }
     render() {
 
         return (
+            <div>
             <Login 
             handleTextFieldFunc={this.handleTextFields}
             emailValue={this.state.loginFields.email}
             passwordValue={this.state.loginFields.password}
             loginFunc={this.login}
             />
+            <h1></h1>
+            </div>
         )
     }
 }
 
-function matchDispatchToProps(dispatch) {
-    return bindActionCreators({session: session}, dispatch);
+const mapDispatchToProps = (dispatch) => {
+    login: (user) => dispatch(session(user));
 }
 
-export default connect(matchDispatchToProps)(LoginContainer);
+export default connect(mapDispatchToProps)(LoginContainer);
