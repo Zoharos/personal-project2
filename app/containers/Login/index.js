@@ -5,7 +5,9 @@ import { session } from '../../actions'
 import Login from '../../components/PageComponents/Login';
 import { auth } from '../../components/MaterialComponents';
 import { loginApi } from './constants';
+import { consoleError } from '../../utils'
 import to from 'await-to-js';
+import { withFirebase } from '../../components/firebase'
 
 class LoginContainer extends React.Component {
     constructor(props) {
@@ -54,6 +56,7 @@ class LoginContainer extends React.Component {
                 password: this.state.loginFields.password
             }
         }));
+        consoleError(err);
         console.log(response.data);
         localStorage.setItem('token',JSON.stringify(response.data.token));
         localStorage.setItem('email',JSON.stringify(response.data.email));
@@ -80,4 +83,4 @@ const mapDispatchToProps = (dispatch) => {
     login: (user) => dispatch(session(user));
 }
 
-export default connect(mapDispatchToProps)(LoginContainer);
+export default connect(mapDispatchToProps)(withFirebase(LoginContainer));

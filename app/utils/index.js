@@ -1,0 +1,1 @@
+export const consoleError = (err) =>{ if(err) console.log(err)}; 
