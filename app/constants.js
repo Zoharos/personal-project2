@@ -5,5 +5,4 @@ export const rootRoute = "/";
 export const registerRoute = '/register';
 export const loginRoute ="/login";
 export const forgotPasswordRoute = '/forgotPassword';
-export const notfoundRoute = '/404';
 export const siteTheme = { primary: '#093170', secondary: '#ff9800' };

@@ -3,15 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const https = require('https');
-const fs = require('fs');
 const pagesRouter = require('./pages/pagesRouter');
 const apiRouter = require('./api/api_router');
+const credentials = require('./encryption')
 const dotenv = require('dotenv').config();
-
-//Encryption assests
-const privateKey  = fs.readFileSync('./server/encryption/localhost.key', 'utf8');
-const certificate = fs.readFileSync('./server/encryption/localhost.crt', 'utf8');
-const credentials = {key: privateKey, cert: certificate};
 
 const app = express();
 

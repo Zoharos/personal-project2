@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const {createJWT, verifyJWT} = require('../auth');
+const {createJWT, verifyJWT} = require('../jwt');
 const schemas = require('./schemas');
 router.use(express.json());
 
@@ -19,11 +19,11 @@ router.get('/', (req, res) => {
     if(err)
       res.status(400).send(err);
   })
-  })
+})
 router.post('/', (req, res) => {
     const data = verifyJWT(req.headers.authorization);
     data ? res.status(200).send(data) : res.status(401).send('Not a valid JWT');
-  })
+})
 
-  module.exports = router
-  //z8LzAyjpdk4tXpOI
+module.exports = router
+//z8LzAyjpdk4tXpOI
