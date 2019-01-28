@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const https = require('https');
 const pagesRouter = require('./pages/pagesRouter');
 const apiRouter = require('./api/api_router');
-const credentials = require('./encryption')
-const dotenv = require('dotenv').config();
+const { credentials } = require('./encryption')
+require('dotenv').config();
 
 const app = express();
 
