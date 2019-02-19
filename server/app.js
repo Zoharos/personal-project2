@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const https = require('https');
 const pagesRouter = require('./pages/pagesRouter');
 const apiRouter = require('./api/api_router');
-const { credentials } = require('./encryption')
+const { credentials } = require('./encryption');
 require('dotenv').config();
 
 const app = express();
@@ -28,6 +28,6 @@ app.get(/^((?!api).)*$/, pagesRouter);
 const httpsServer = https.createServer(credentials,app, () => {
     console.log('Listening HTTPs');
   });
-httpsServer.listen(3000);
+httpsServer.listen(process.env.PORT);
 
 module.exports = app;

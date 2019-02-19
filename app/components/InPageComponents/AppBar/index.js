@@ -20,7 +20,7 @@ const styles = theme => ({
     boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)'
   },
   searchNav: {
-    width: '50%',
+    width: '65%',
     float: 'left',
     boxShadow: 'none'
   },
@@ -49,7 +49,7 @@ const styles = theme => ({
   },
   bottomNavBar: {
     paddingTop: 50,
-    width: '50%',
+    width: '35%',
     display: '-webkit-flex',
     backgroundColor: siteTheme.primary,
     height: 35
@@ -76,11 +76,7 @@ const styles = theme => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing.unit,
-      width: 'auto',
-    },
+    width: '80%'
   },
   searchIcon: {
     width: theme.spacing.unit * 9,
