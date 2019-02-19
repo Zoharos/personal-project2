@@ -18,6 +18,7 @@ const styles = theme => ({
   logoPadding: {
     paddingLeft: '3%',
     paddingTop: '2%',
+    width: '10%',
   },
   headline: {
     textAlign: 'center',
@@ -32,7 +33,7 @@ const styles = theme => ({
     margin: 'auto',
     textAlign: 'center',
     '& Button': {
-      margin: 10,
+      marginBottom: 10,
       width: 'inherit'
     },
   },
@@ -52,7 +53,6 @@ const styles = theme => ({
   },
   ltrTextField: {
     width: 'inherit',
-    margin: 10,
     '& div': {
       width: 'inherit',
       marginBottom: 10,

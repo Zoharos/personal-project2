@@ -9,9 +9,10 @@ import { rootRoute, registerRoute, forgotPasswordRoute } from '../../../constant
 import { passwordLabel, emailLabel, pageTitle, signinLabel, subHeadLabel, createAccountlabel, forgotLabel } from './constants'
 
 const styles = theme => ({
-    logoPadding: {
+    logo: {
       paddingLeft: '3%',
       paddingTop: '2%',
+      width: '10%',
     },
     headline: {
       textAlign: 'center',
@@ -31,8 +32,8 @@ const styles = theme => ({
       margin: 'auto',
       textAlign: 'center',
       '& Button': {
-        margin: 10,
-        width: 'inherit'
+        marginBottom: 10,
+        width: 'inherit',
       },
     },
     rtlTextField: {
@@ -51,7 +52,6 @@ const styles = theme => ({
     },
     ltrTextField: {
       width: 'inherit',
-      margin: 10,
       '& div': {
         width: 'inherit',
         marginBottom: 10,
@@ -66,7 +66,7 @@ const Login = (props) => {
           <Helmet>
             <title>{pageTitle}</title>
           </Helmet>
-          <Link to={rootRoute}><img className={classes.logoPadding} src={blackLogo}/></Link>
+          <Link to={rootRoute}><img className={classes.logo} src={blackLogo}/></Link>
           <h1 className={classes.headline}>{signinLabel}</h1>
           <h4 className={classes.secondaryHeadline}>{subHeadLabel} &nbsp; 
             <Link className={classes.links} to={registerRoute}>{createAccountlabel}</Link>
