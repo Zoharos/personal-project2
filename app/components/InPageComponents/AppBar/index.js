@@ -10,7 +10,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { logo } from '../../../imports';
 import { loginRoute, siteTheme } from '../../../constants';
-import { signInButton } from './constants';
+import { signInButton, signUpButton } from './constants';
 
 const styles = theme => ({
   root: {
@@ -111,35 +111,39 @@ const NavBar = (props) => {
     <div className={classes.root}>
       <AppBar position="static" className={classes.searchNav}>
         <Toolbar>
-            <img src={logo} className={classes.navLogo}/>
-            <div className={classes.search}>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-              />
-            </div>
-            <Button color="secondary">
-                <SearchIcon />
-            </Button>
+          <img src={logo} className={classes.navLogo}/>
+          <div className={classes.search}>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+            />
+          </div>
+          <Button color="secondary">
+              <SearchIcon />
+          </Button>
         </Toolbar>
       </AppBar>
       <div className={classes.bottomNavBar}>
-            <div className={classes.loginNav}>
-              <NavLink to={loginRoute} className={classes.noUnderline}>
-                <Button color="secondary" className={classes.bottomNavBarButton}>
-                  {signInButton}
-                  <ArrowDropDown className={classes.arrowDropDown}/>
-                </Button>
-              </NavLink>
-              {/* <div className={classes.loginMenu}>
-                <Button color="secondary">Sign in</Button>
-                <Button color="secondary">Sign up</Button>
-            </div> */}
-            </div>
-            <div className={classes.darkScreen}></div>
+        <div className={classes.loginNav}>
+          <NavLink to={loginRoute} className={classes.noUnderline}>
+            <Button color="secondary" className={classes.bottomNavBarButton}>
+              {signInButton}
+            </Button>
+          </NavLink>
+          <NavLink to={loginRoute} className={classes.noUnderline}>
+            <Button color="secondary" className={classes.bottomNavBarButton}>
+              {signUpButton}
+            </Button>
+          </NavLink>
+          {/* <div className={classes.loginMenu}>
+            <Button color="secondary">Sign in</Button>
+            <Button color="secondary">Sign up</Button>
+        </div> */}
+        </div>
+        <div className={classes.darkScreen}></div>
       </div>
     </div>
   );
