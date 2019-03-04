@@ -28,8 +28,8 @@ class LoginContainer extends React.Component {
         if(isValid){
             const [err, response] = await to(axios.get(loginApi,{
                 headers: {
-                    email: this.state.loginFields.email,
-                    password: this.state.loginFields.password
+                    email: this.state.email,
+                    password: this.state.password
                 }
             }));
             consoleError(err);
