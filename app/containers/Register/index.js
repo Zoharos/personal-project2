@@ -14,37 +14,43 @@ class RegisterContainer extends React.Component {
         name: '',
         email: '',
         password1: '',
-        password2: ''
+        password2: '',
+        isNameInvalid: false,
+        isEmailInvalid: false, 
+        isPassword1Invalid: false,
+        isPassword2Invalid: false,
+        isPasswordsInvalid: false
     };
     handleTextFields = (textFieldObj) => {
         const fields = this.state;
         fields[textFieldObj.target.id] = textFieldObj.target.value;
         this.setState({fields})
     }
-    register = () => {
+    register = async () => {
         const {
             name,
             email,
             password1,
             password2,
         } = this.state;
-        const isValid = name !== '' && email !== '' 
-                        && password1 === password2;
-        if(isValid)
+        const isNameInvalid = name === '';
+        const isEmailInvalid = email === ''; 
+        const isPasswordsInvalid = password1 !== password2;
+        const isPassword1Invalid = password1 === '' || isPasswordsInvalid;
+        const isPassword2Invalid = password2 === '' || isPasswordsInvalid;
+        const isInvalid = isNameInvalid || isEmailInvalid || isPassword1Invalid || isPassword2Invalid || isPasswordsInvalid;
+        if(!isInvalid)
         {
-            axios.post(registerApi,{
-                    /* firstName: this.state.registrationFields.regFirstName,
-                    lastName: this.state.registrationFields.regLastName,
-                    email1: this.state.registrationFields.regEmail1,
-                    email2: this.state.registrationFields.regEmail2,
-                    password1: this.state.registrationFields.regPassword1,
-                    password2: this.state.registrationFields.regPassword2, */
-                    //token: JSON.parse(localStorage.getItem('token'))
-                })
-                .then(function (response) {
-                    console.log(response);
-            }) 
+            const [error, user] = await to(this.props.firebase.signUp(email,password1));
+            console.log(user);
         }
+        this.setState({
+            isNameInvalid,
+            isEmailInvalid,
+            isPassword1Invalid,
+            isPassword2Invalid,
+            isPasswordsInvalid
+        })
     }
     render() {
         return (
@@ -55,7 +61,11 @@ class RegisterContainer extends React.Component {
                 emailValue={this.state.email}
                 password1Value={this.state.password1}
                 password2Value={this.state.password2}
-                loginFunc={this.login}
+                registerFunc={this.register}
+                isNameInvalid={this.state.isNameInvalid}
+                isEmailInvalid={this.state.isEmailInvalid}
+                isPassword1Invalid={this.state.isPassword1Invalid}
+                isPassword2Invalid={this.state.isPassword2Invalid}
                 />
             </div>
         )

@@ -60,7 +60,7 @@ const styles = theme => ({
 });
 
 const Login = (props) => {
-    const { classes, emailValue, passwordValue } = props;
+    const { classes, emailValue, passwordValue, isEmailInvalid, isPasswordInvalid } = props;
     return (
         <div>
           <Helmet>
@@ -73,8 +73,8 @@ const Login = (props) => {
           </h4>
           <div className={classes.textFieldsDecor}>
             <form className={classes.ltrTextField} onChange={props.handleTextFieldFunc}>
-              <TextField id="email" value={emailValue} label={emailLabel}></TextField>
-              <TextField id="password" value={passwordValue} label={passwordLabel} type='password'></TextField>
+              <TextField error={isEmailInvalid} id="email" value={emailValue} label={emailLabel} />
+              <TextField error={isPasswordInvalid} id="password" value={passwordValue} label={passwordLabel} type='password' />
             </form>
             <Button color="secondary" variant="contained" onClick={props.loginFunc}>{signinLabel}</Button>
             <Link className={classes.links} to={forgotPasswordRoute}>{forgotLabel}</Link>

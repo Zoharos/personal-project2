@@ -12,7 +12,9 @@ import { withFirebase } from '../../components/firebase'
 class LoginContainer extends React.Component {
     state = {
         email: '',
-        password:''
+        password: '',
+        isEmailInvalid: false,
+        isPasswordInvalid: false
     };
     handleTextFields = (textFieldObj) => {
         const fields = this.state;
@@ -22,10 +24,11 @@ class LoginContainer extends React.Component {
     login = async () => {
         const {
             email,
-            password
+            password,
         } = this.state;
-        const isValid = email != '' && password != '';
-        if(isValid){
+        const isEmailInvalid = email === '';
+        const isPasswordInvalid = password === ''; 
+        if(!isEmailInvalid && !isPasswordInvalid){
             const [err, response] = await to(axios.get(loginApi,{
                 headers: {
                     email: this.state.email,
@@ -39,6 +42,10 @@ class LoginContainer extends React.Component {
             auth.authenticate();
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
         }
+        this.setState({
+            isEmailInvalid,
+            isPasswordInvalid,
+        })
     }
     render() {
         return (
@@ -48,6 +55,8 @@ class LoginContainer extends React.Component {
                 emailValue={this.state.email}
                 passwordValue={this.state.password}
                 loginFunc={this.login}
+                isEmailInvalid={this.state.isEmailInvalid}
+                isPasswordInvalid={this.state.isPasswordInvalid}
                 />
             </div>
         )

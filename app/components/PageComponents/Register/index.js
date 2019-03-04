@@ -65,7 +65,11 @@ const Register = (props) => {
       nameValue,
       emailValue,
       password1Value,
-      password2Value
+      password2Value,
+      isNameInvalid,
+      isEmailInvalid, 
+      isPassword1Invalid,
+      isPassword2Invalid,
     } = props;
     return (
         <div>
@@ -79,12 +83,12 @@ const Register = (props) => {
           </h4>
           <div className={classes.textFieldsDecor}>
             <form className={classes.ltrTextField} onChange={props.handleTextFieldFunc}>
-              <TextField id="name" value={nameValue} label="Your name"></TextField>
-              <TextField id="email" value={emailValue} label={emailLabel}></TextField>
-              <TextField id="password1" value={password1Value} label={passwordLabel} type='password'></TextField>
-              <TextField id="password2" value={password2Value} label="Re-enter password" type='password'></TextField>
+              <TextField error={isNameInvalid} id="name" value={nameValue} label="Your name" />
+              <TextField error={isEmailInvalid} id="email" value={emailValue} label={emailLabel} />
+              <TextField error={isPassword1Invalid} id="password1" value={password1Value} label={passwordLabel} type='password' />
+              <TextField error={isPassword2Invalid} id="password2" value={password2Value} label="Re-enter password" type='password' />
             </form>
-            <Button color="secondary" variant="contained" onClick={props.loginFunc}>{signUpLabel}</Button>
+            <Button color="secondary" variant="contained" onClick={props.registerFunc}>{signUpLabel}</Button>
           </div>
         </div>
     );
