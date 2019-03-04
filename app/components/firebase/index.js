@@ -8,5 +8,5 @@ export const withFirebase = Component => props => (
     </FirebaseConsumer>
 );
 
-export { FirebaseProvider, FirebaseConsumer  };
+export { FirebaseProvider, FirebaseConsumer };
 export default Firebase;

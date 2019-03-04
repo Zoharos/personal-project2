@@ -5,8 +5,8 @@ import { Helmet } from 'react-helmet';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { blackLogo } from '../../../imports';
-import { rootRoute, registerRoute, forgotPasswordRoute } from '../../../constants';
-import { passwordLabel, emailLabel, pageTitle, signinLabel, subHeadLabel, createAccountlabel, forgotLabel } from './constants'
+import { rootRoute, loginRoute } from '../../../constants';
+import { passwordLabel, emailLabel, pageTitle, signUpLabel, subHeadLabel, logInlabel } from './constants'
 
 const styles = theme => ({
     logo: {
@@ -59,31 +59,38 @@ const styles = theme => ({
     },
 });
 
-const Login = (props) => {
-    const { classes, emailValue, passwordValue } = props;
+const Register = (props) => {
+    const { 
+      classes,
+      nameValue,
+      emailValue,
+      password1Value,
+      password2Value
+    } = props;
     return (
         <div>
           <Helmet>
             <title>{pageTitle}</title>
           </Helmet>
           <Link to={rootRoute}><img className={classes.logo} src={blackLogo}/></Link>
-          <h1 className={classes.headline}>{signinLabel}</h1>
+          <h1 className={classes.headline}>{signUpLabel}</h1>
           <h4 className={classes.secondaryHeadline}>{subHeadLabel} &nbsp; 
-            <Link className={classes.links} to={registerRoute}>{createAccountlabel}</Link>
+            <Link className={classes.links} to={loginRoute}>{logInlabel}</Link>
           </h4>
           <div className={classes.textFieldsDecor}>
             <form className={classes.ltrTextField} onChange={props.handleTextFieldFunc}>
+              <TextField id="name" value={nameValue} label="Your name"></TextField>
               <TextField id="email" value={emailValue} label={emailLabel}></TextField>
-              <TextField id="password" value={passwordValue} label={passwordLabel} type='password'></TextField>
+              <TextField id="password1" value={password1Value} label={passwordLabel} type='password'></TextField>
+              <TextField id="password2" value={password2Value} label="Re-enter password" type='password'></TextField>
             </form>
-            <Button color="secondary" variant="contained" onClick={props.loginFunc}>{signinLabel}</Button>
-            <Link className={classes.links} to={forgotPasswordRoute}>{forgotLabel}</Link>
+            <Button color="secondary" variant="contained" onClick={props.loginFunc}>{signUpLabel}</Button>
           </div>
         </div>
     );
 }
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(Register);
 
 
 //------------------description------------------

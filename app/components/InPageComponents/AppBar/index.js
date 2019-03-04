@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { logo } from '../../../imports';
-import { loginRoute, siteTheme } from '../../../constants';
+import { loginRoute, registerRoute, siteTheme } from '../../../constants';
 import { signInButton, signUpButton } from './constants';
 
 const styles = theme => ({
@@ -133,7 +133,7 @@ const NavBar = (props) => {
               {signInButton}
             </Button>
           </NavLink>
-          <NavLink to={loginRoute} className={classes.noUnderline}>
+          <NavLink to={registerRoute} className={classes.noUnderline}>
             <Button color="secondary" className={classes.bottomNavBarButton}>
               {signUpButton}
             </Button>

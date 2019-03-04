@@ -10,77 +10,52 @@ import to from 'await-to-js';
 import { withFirebase } from '../../components/firebase'
 
 class LoginContainer extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        registrationFields: {
-            regFirstName: '',
-            regLastName: '',
-            regEmail1: '',
-            regEmail2: '',
-            regPassword1: '',
-            regPassword2: ''
-        },
-        loginFields: {
-            email: '',
-            password:''
-        }
-      };
-    }
+    state = {
+        email: '',
+        password:''
+    };
     handleTextFields = (textFieldObj) => {
-        const loginFields = this.state.loginFields;
-        loginFields[textFieldObj.target.id] = textFieldObj.target.value;
-        this.setState({loginFields})
-    }
-    register = () => {
-        if((this.state.registrationFields.regEmail1 == this.state.registrationFields.regEmail2) || (this.state.registrationFields.regPassword1 == this.state.registrationFields.regPassword2))
-        {
-            axios.post('/api/login',{
-                    /* firstName: this.state.registrationFields.regFirstName,
-                    lastName: this.state.registrationFields.regLastName,
-                    email1: this.state.registrationFields.regEmail1,
-                    email2: this.state.registrationFields.regEmail2,
-                    password1: this.state.registrationFields.regPassword1,
-                    password2: this.state.registrationFields.regPassword2, */
-                    //token: JSON.parse(localStorage.getItem('token'))
-                })
-                .then(function (response) {
-                    console.log(response);
-            }) 
-        }
+        const fields = this.state;
+        fields[textFieldObj.target.id] = textFieldObj.target.value;
+        this.setState({fields})
     }
     login = async () => {
-        const [err, response] = await to(axios.get(loginApi,{
-            headers: {
-                email: this.state.loginFields.email,
-                password: this.state.loginFields.password
-            }
-        }));
-        consoleError(err);
-        console.log(response.data);
-        localStorage.setItem('token',JSON.stringify(response.data.token));
-        localStorage.setItem('email',JSON.stringify(response.data.email));
-        auth.authenticate();
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
+        const {
+            email,
+            password
+        } = this.state;
+        const isValid = email != '' && password != '';
+        if(isValid){
+            const [err, response] = await to(axios.get(loginApi,{
+                headers: {
+                    email: this.state.loginFields.email,
+                    password: this.state.loginFields.password
+                }
+            }));
+            consoleError(err);
+            console.log(response.data);
+            localStorage.setItem('token',JSON.stringify(response.data.token));
+            localStorage.setItem('email',JSON.stringify(response.data.email));
+            auth.authenticate();
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
+        }
     }
     render() {
-
         return (
             <div>
-            <Login 
-            handleTextFieldFunc={this.handleTextFields}
-            emailValue={this.state.loginFields.email}
-            passwordValue={this.state.loginFields.password}
-            loginFunc={this.login}
-            />
-            <h1></h1>
+                <Login 
+                handleTextFieldFunc={this.handleTextFields}
+                emailValue={this.state.email}
+                passwordValue={this.state.password}
+                loginFunc={this.login}
+                />
             </div>
         )
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    login: (user) => dispatch(session(user));
-}
+// const mapDispatchToProps = (dispatch) => {
+//     login: (user) => dispatch(session(user));
+// }
 
-export default connect(mapDispatchToProps)(withFirebase(LoginContainer));
+export default withFirebase(LoginContainer);
