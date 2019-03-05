@@ -3,11 +3,12 @@ import { NavLink } from "react-router-dom";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
+import CartIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { logo } from '../../../imports';
 import { loginRoute, registerRoute, siteTheme } from '../../../constants';
 import { signInButton, signUpButton } from './constants';
@@ -121,9 +122,9 @@ const NavBar = (props) => {
               }}
             />
           </div>
-          <Button color="secondary">
+          <IconButton color="secondary">
               <SearchIcon />
-          </Button>
+          </IconButton>
         </Toolbar>
       </AppBar>
       <div className={classes.bottomNavBar}>
@@ -136,6 +137,11 @@ const NavBar = (props) => {
           <NavLink to={registerRoute} className={classes.noUnderline}>
             <Button color="secondary" className={classes.bottomNavBarButton}>
               {signUpButton}
+            </Button>
+          </NavLink>
+          <NavLink to={registerRoute} className={classes.noUnderline}>
+            <Button color="secondary" className={classes.bottomNavBarButton}>
+              <CartIcon />
             </Button>
           </NavLink>
           {/* <div className={classes.loginMenu}>
