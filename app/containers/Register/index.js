@@ -19,13 +19,19 @@ class RegisterContainer extends React.Component {
         isEmailInvalid: false, 
         isPassword1Invalid: false,
         isPassword2Invalid: false,
-        isPasswordsInvalid: false
+        isPasswordsInvalid: false,
+        isSnackbarOpen: false,
+        errorMessage: '',
+        user: {},
     };
     handleTextFields = (textFieldObj) => {
         const fields = this.state;
         fields[textFieldObj.target.id] = textFieldObj.target.value;
         this.setState({fields})
     }
+    
+    handleCloseSnackbar = () => this.setState({isSnackbarOpen: false})
+
     register = async () => {
         const {
             name,
@@ -42,7 +48,7 @@ class RegisterContainer extends React.Component {
         if(!isInvalid)
         {
             const [error, user] = await to(this.props.firebase.signUp(email,password1));
-            console.log(user);
+            error ? this.setState({errorMessage: error.message, isSnackbarOpen: true}) : this.setState({user});
         }
         this.setState({
             isNameInvalid,
@@ -66,6 +72,9 @@ class RegisterContainer extends React.Component {
                 isEmailInvalid={this.state.isEmailInvalid}
                 isPassword1Invalid={this.state.isPassword1Invalid}
                 isPassword2Invalid={this.state.isPassword2Invalid}
+                isSnackbarOpen={this.state.isSnackbarOpen}
+                errorMessage={this.state.errorMessage}
+                onClose={this.handleCloseSnackbar}
                 />
             </div>
         )

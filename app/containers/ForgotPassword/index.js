@@ -6,25 +6,29 @@ import { auth } from '../../components/MaterialComponents';
 import { forgotApi } from './constants';
 
 class ForgotPasswordContainer extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
+    state = {
         email: '',
-      };
-    }
+        isEmailInvalid: false,
+    };
     handleTextFields = (textFieldObj) => {
         this.setState({email: textFieldObj.target.value})
     }
     getPassword = () => {
-        axios.get(forgotApi,{
-            params: {
-                email: this.state.loginFields.email
-            }
-        }).then(function (response){
-            console.log(response.data);
-        }).catch(function (err){
-            console.log(err);
-        })
+        const { email } = this.state;
+        const isEmailInvalid = email === '';
+        if(!isEmailInvalid)
+        {
+            axios.get(forgotApi,{
+                params: {
+                    email: this.state.loginFields.email
+                }
+            }).then(function (response){
+                console.log(response.data);
+            }).catch(function (err){
+                console.log(err);
+            })
+        }
+        this.setState({isEmailInvalid})
     }
     render() {
         return (
@@ -32,6 +36,7 @@ class ForgotPasswordContainer extends React.Component {
             emailValue={this.state.email}
             handleTextFieldFunc={this.handleTextFields}
             getPasswordFunc={this.getPassword}
+            isEmailInvalid={this.state.isEmailInvalid}
             />
         )
     }

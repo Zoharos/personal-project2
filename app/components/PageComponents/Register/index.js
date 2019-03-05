@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarWrapper from '../../InPageComponents/SnackbarWrapper';
 import { Helmet } from 'react-helmet';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -57,6 +59,11 @@ const styles = theme => ({
         marginBottom: 10,
       },
     },
+    snack: {
+      width: 260,
+      margin: 'auto',
+      textAlign: 'center',
+    },
 });
 
 const Register = (props) => {
@@ -70,6 +77,9 @@ const Register = (props) => {
       isEmailInvalid, 
       isPassword1Invalid,
       isPassword2Invalid,
+      isSnackbarOpen,
+      errorMessage,
+      onClose
     } = props;
     return (
         <div>
@@ -81,6 +91,9 @@ const Register = (props) => {
           <h4 className={classes.secondaryHeadline}>{subHeadLabel} &nbsp; 
             <Link className={classes.links} to={loginRoute}>{logInlabel}</Link>
           </h4>
+          <Snackbar open={isSnackbarOpen}>
+            <SnackbarWrapper onClose={onClose} variant="error" className={classes.snack} message={errorMessage} />
+          </Snackbar>
           <div className={classes.textFieldsDecor}>
             <form className={classes.ltrTextField} onChange={props.handleTextFieldFunc}>
               <TextField error={isNameInvalid} id="name" value={nameValue} label="Your name" />
