@@ -30,7 +30,12 @@ class RegisterContainer extends React.Component {
         this.setState({fields})
     }
     
-    handleCloseSnackbar = () => this.setState({isSnackbarOpen: false})
+    handleCloseSnackbar = () => this.setState({isSnackbarOpen: false});
+
+    verifyUser = (user) => {
+        this.props.firebase.sendEmailVerification();
+        this.setState({user});
+    }
 
     register = async () => {
         const {
@@ -48,7 +53,8 @@ class RegisterContainer extends React.Component {
         if(!isInvalid)
         {
             const [error, user] = await to(this.props.firebase.signUp(email,password1));
-            error ? this.setState({errorMessage: error.message, isSnackbarOpen: true}) : this.setState({user});
+            error ? this.setState({errorMessage: error.message, isSnackbarOpen: true}) : this.verifyUser(user); //this.setState({user});
+            console.log(user);
         }
         this.setState({
             isNameInvalid,

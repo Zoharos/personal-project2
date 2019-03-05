@@ -91,7 +91,7 @@ const Register = (props) => {
           <h4 className={classes.secondaryHeadline}>{subHeadLabel} &nbsp; 
             <Link className={classes.links} to={loginRoute}>{logInlabel}</Link>
           </h4>
-          <Snackbar open={isSnackbarOpen}>
+          <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSnackbarOpen}>
             <SnackbarWrapper onClose={onClose} variant="error" className={classes.snack} message={errorMessage} />
           </Snackbar>
           <div className={classes.textFieldsDecor}>
