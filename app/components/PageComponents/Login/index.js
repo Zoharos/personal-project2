@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { Helmet } from 'react-helmet';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarWrapper from '../../InPageComponents/SnackbarWrapper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { blackLogo } from '../../../imports';
@@ -57,10 +59,24 @@ const styles = theme => ({
         marginBottom: 10,
       },
     },
+    snack: {
+      width: 260,
+      margin: 'auto',
+      textAlign: 'center'
+    },
 });
 
 const Login = (props) => {
-    const { classes, emailValue, passwordValue, isEmailInvalid, isPasswordInvalid } = props;
+    const { 
+      classes, 
+      emailValue, 
+      passwordValue, 
+      isEmailInvalid, 
+      isPasswordInvalid,
+      isSnackbarOpen,
+      onClose,
+      errorMessage
+    } = props;
     return (
         <div>
           <Helmet>
@@ -79,6 +95,9 @@ const Login = (props) => {
             <Button color="secondary" variant="contained" onClick={props.loginFunc}>{signinLabel}</Button>
             <Link className={classes.links} to={forgotPasswordRoute}>{forgotLabel}</Link>
           </div>
+          <Snackbar autoHideDuration={7000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSnackbarOpen} onClose={onClose}>
+            <SnackbarWrapper variant="error" className={classes.snack} message={errorMessage} />
+          </Snackbar>
         </div>
     );
 }
