@@ -1,8 +1,5 @@
 import React from 'react';
-import axios from 'axios';
 import * as R from 'ramda';
-import { connect } from 'react-redux';
-import { session } from '../../actions';
 import Login from '../../components/PageComponents/Login';
 import { auth } from '../../components/MaterialComponents';
 import to from 'await-to-js';
@@ -33,6 +30,11 @@ class LoginContainer extends React.Component {
         // auth.authenticate();
         // axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
         localStorage.setItem('name',JSON.stringify(response.user.displayName));
+        this.setState({
+            isEmailInvalid: false,
+            isPasswordInvalid: false,
+            isSnackbarOpen: false
+        })
         console.log(response);
     }
 

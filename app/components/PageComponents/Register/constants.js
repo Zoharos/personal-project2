@@ -6,3 +6,4 @@ export const signUpLabel = 'Sign up';
 export const subHeadLabel = "Already have an account?";
 export const logInlabel = "Log in";
 export const pageTitle = siteTitle + " | Regitration";
+export const successMessage = "Success! a verification mail was sent to ";

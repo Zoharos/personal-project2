@@ -1,12 +1,7 @@
 import React from 'react';
 import * as R from 'ramda';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { session } from '../../actions'
 import Register from '../../components/PageComponents/Register';
 import { auth } from '../../components/MaterialComponents';
-import { registerApi } from './constants';
-import { consoleError } from '../../utils'
 import to from 'await-to-js';
 import { withFirebase } from '../../components/firebase'
 
@@ -22,7 +17,9 @@ class RegisterContainer extends React.Component {
         isPassword2Invalid: false,
         isPasswordsInvalid: false,
         isSnackbarOpen: false,
+        isSuccessSnackbarOpen: false,
         errorMessage: '',
+        started: false,
         user: {},
     };
     handleTextFields = (textFieldObj) => {
@@ -31,27 +28,38 @@ class RegisterContainer extends React.Component {
         this.setState({fields})
     }
     
-    handleCloseSnackbar = () => this.setState({isSnackbarOpen: false});
+    handleCloseErrorSnackbar = () => this.setState({isSnackbarOpen: false});
+
+    handleCloseSuccessSnackbar = () => this.setState({isSuccessSnackbarOpen: false});
 
     handleError = (error) => {
         R.includes("email",error.message) ? 
-        this.setState({errorMessage: error.message, isSnackbarOpen: true, isEmailInvalid: true, isPasswordsInvalid: false}) : 
-        this.setState({errorMessage: error.message, isSnackbarOpen: true, isPasswordsInvalid: true, isEmailInvalid: false})
+        this.setState({errorMessage: error.message, isSnackbarOpen: true, isEmailInvalid: true, isPasswordsInvalid: false, started: false}) : 
+        this.setState({errorMessage: error.message, isSnackbarOpen: true, isPasswordsInvalid: true, isEmailInvalid: false, started: false})
         console.log("error: " + error);
     }
     
-    verifyUser = (user) => {
+    verifyUser = () => {
         this.props.firebase.sendEmailVerification();
-        this.setState({user});
-        console.log("user: " + user);
+        this.setState({
+            isNameInvalid: false,
+            isEmailInvalid: false,
+            isPassword1Invalid: false,
+            isPassword2Invalid: false,
+            isPasswordsInvalid: false,
+            isSnackbarOpen: false,
+            isSuccessSnackbarOpen: true,
+            started: false
+        });
     }
 
     updateName = async (name) => {
         const [error, user] = await to(this.props.firebase.updateUser(name));
-        error ? console.log(error) : this.verifyUser(user);
+        error ? console.log(error) : this.verifyUser();
     }
 
     signUp = async (email, password, name) => {
+        this.setState({started: true})
         const [error, user] = await to(this.props.firebase.signUp(email,password));
         error ? this.handleError(error) : this.updateName(name); //this.setState({user});
     }
@@ -98,16 +106,15 @@ class RegisterContainer extends React.Component {
                 isPassword2Invalid={this.state.isPassword2Invalid}
                 isPasswordsInvalid={this.state.isPasswordsInvalid}
                 isSnackbarOpen={this.state.isSnackbarOpen}
+                isSuccessSnackbarOpen={this.state.isSuccessSnackbarOpen}
+                closeErrorSnackbar={this.handleCloseErrorSnackbar}
+                closeSuccessSnackbar={this.handleCloseSuccessSnackbar}
                 errorMessage={this.state.errorMessage}
-                onClose={this.handleCloseSnackbar}
+                started={this.state.started}
                 />
             </div>
         )
     }
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//     login: (user) => dispatch(session(user));
-// }
 
 export default withFirebase(RegisterContainer);

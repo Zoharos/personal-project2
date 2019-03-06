@@ -6,9 +6,10 @@ import SnackbarWrapper from '../../InPageComponents/SnackbarWrapper';
 import { Helmet } from 'react-helmet';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { blackLogo } from '../../../imports';
 import { rootRoute, loginRoute } from '../../../constants';
-import { passwordLabel, emailLabel, pageTitle, signUpLabel, subHeadLabel, logInlabel } from './constants'
+import { passwordLabel, emailLabel, pageTitle, signUpLabel, subHeadLabel, logInlabel, successMessage } from './constants'
 
 const styles = theme => ({
     logo: {
@@ -80,7 +81,10 @@ const Register = (props) => {
       isPasswordsInvalid,
       isSnackbarOpen,
       errorMessage,
-      onClose
+      started,
+      isSuccessSnackbarOpen,
+      closeErrorSnackbar,
+      closeSuccessSnackbar
     } = props;
     return (
         <div>
@@ -92,8 +96,11 @@ const Register = (props) => {
           <h4 className={classes.secondaryHeadline}>{subHeadLabel} &nbsp; 
             <Link className={classes.links} to={loginRoute}>{logInlabel}</Link>
           </h4>
-          <Snackbar autoHideDuration={7000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSnackbarOpen} onClose={onClose}>
+          <Snackbar autoHideDuration={7000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSnackbarOpen} onClose={closeErrorSnackbar}>
             <SnackbarWrapper variant="error" className={classes.snack} message={errorMessage} />
+          </Snackbar>
+          <Snackbar autoHideDuration={7000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSuccessSnackbarOpen} onClose={closeSuccessSnackbar}>
+            <SnackbarWrapper variant="success" className={classes.snack} message={successMessage + emailValue} />
           </Snackbar>
           <div className={classes.textFieldsDecor}>
             <form className={classes.ltrTextField} onChange={props.handleTextFieldFunc}>
@@ -102,7 +109,8 @@ const Register = (props) => {
               <TextField error={isPassword1Invalid || isPasswordsInvalid} id="password1" value={password1Value} label={passwordLabel} type='password' />
               <TextField error={isPassword2Invalid || isPasswordsInvalid} id="password2" value={password2Value} label="Re-enter password" type='password' />
             </form>
-            <Button color="secondary" variant="contained" onClick={props.registerFunc}>{signUpLabel}</Button>
+            <Button disabled={started} color="secondary" variant="contained" onClick={props.registerFunc}>{signUpLabel}</Button>
+            {started && <CircularProgress size={24} />}
           </div>
         </div>
     );
