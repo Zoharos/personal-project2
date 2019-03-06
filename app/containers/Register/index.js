@@ -33,22 +33,27 @@ class RegisterContainer extends React.Component {
     
     handleCloseSnackbar = () => this.setState({isSnackbarOpen: false});
 
-    verifyUser = (user) => {
-        this.props.firebase.sendEmailVerification();
-        this.setState({user});
-        console.log("user: " + user);
-    }
-
     handleError = (error) => {
         R.includes("email",error.message) ? 
         this.setState({errorMessage: error.message, isSnackbarOpen: true, isEmailInvalid: true, isPasswordsInvalid: false}) : 
         this.setState({errorMessage: error.message, isSnackbarOpen: true, isPasswordsInvalid: true, isEmailInvalid: false})
         console.log("error: " + error);
     }
+    
+    verifyUser = (user) => {
+        this.props.firebase.sendEmailVerification();
+        this.setState({user});
+        console.log("user: " + user);
+    }
 
-    signUp = async (email, password) => {
+    updateName = async (name) => {
+        const [error, user] = await to(this.props.firebase.updateUser(name));
+        error ? console.log(error) : this.verifyUser(user);
+    }
+
+    signUp = async (email, password, name) => {
         const [error, user] = await to(this.props.firebase.signUp(email,password));
-        error ? this.handleError(error) : this.verifyUser(user); //this.setState({user});
+        error ? this.handleError(error) : this.updateName(name); //this.setState({user});
     }
 
     validateTextFields = async () => {
@@ -67,7 +72,7 @@ class RegisterContainer extends React.Component {
         const errorMessage = isNameInvalid ? "oops.. enter your name" : isEmailInvalid ? "oops.. enter your email" :
                              isPassword1Invalid ? "oops.. enter password" : isPassword2Invalid ? "oops.. enter password" :
                               "oops.. Those passwords didn't match. Try again."
-        !isInvalid ? this.signUp(email, password1) : this.setState({
+        !isInvalid ? this.signUp(email, password1, name) : this.setState({
                                                             isNameInvalid,
                                                             isEmailInvalid,
                                                             isPassword1Invalid,

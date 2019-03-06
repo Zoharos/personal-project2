@@ -29,6 +29,8 @@ class firebase {
     passwordUpdate = password => this.auth.currentUser.updatePassword(password);
 
     sendEmailVerification = () => this.auth.currentUser.sendEmailVerification();
+
+    updateUser = (name) => this.auth.currentUser.updateProfile({displayName: name});
 };
 
 export default firebase;

@@ -28,10 +28,12 @@ class LoginContainer extends React.Component {
     }
 
     handleToken = (response) => {
-        localStorage.setItem('token',JSON.stringify(response.data.token));
-        localStorage.setItem('email',JSON.stringify(response.data.email));
-        auth.authenticate();
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
+        // localStorage.setItem('token',JSON.stringify(response.data.token));
+        // localStorage.setItem('email',JSON.stringify(response.data.email));
+        // auth.authenticate();
+        // axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
+        localStorage.setItem('name',JSON.stringify(response.user.displayName));
+        console.log(response);
     }
 
     handleError = (error) => {
