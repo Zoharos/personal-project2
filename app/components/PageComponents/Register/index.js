@@ -96,10 +96,10 @@ const Register = (props) => {
           <h4 className={classes.secondaryHeadline}>{subHeadLabel} &nbsp; 
             <Link className={classes.links} to={loginRoute}>{logInlabel}</Link>
           </h4>
-          <Snackbar autoHideDuration={7000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSnackbarOpen} onClose={closeErrorSnackbar}>
+          <Snackbar autoHideDuration={9000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSnackbarOpen} onClose={closeErrorSnackbar}>
             <SnackbarWrapper variant="error" className={classes.snack} message={errorMessage} />
           </Snackbar>
-          <Snackbar autoHideDuration={7000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSuccessSnackbarOpen} onClose={closeSuccessSnackbar}>
+          <Snackbar autoHideDuration={9000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSuccessSnackbarOpen} onClose={closeSuccessSnackbar}>
             <SnackbarWrapper variant="success" className={classes.snack} message={successMessage + emailValue} />
           </Snackbar>
           <div className={classes.textFieldsDecor}>

@@ -34,8 +34,8 @@ class RegisterContainer extends React.Component {
 
     handleError = (error) => {
         R.includes("email",error.message) ? 
-        this.setState({errorMessage: error.message, isSnackbarOpen: true, isEmailInvalid: true, isPasswordsInvalid: false, started: false}) : 
-        this.setState({errorMessage: error.message, isSnackbarOpen: true, isPasswordsInvalid: true, isEmailInvalid: false, started: false})
+        this.setState({errorMessage: error.message, isSnackbarOpen: true, isNameInvalid: false, isEmailInvalid: true, isPassword1Invalid: false, isPassword2Invalid: false, isPasswordsInvalid: false, started: false}) : 
+        this.setState({errorMessage: error.message, isSnackbarOpen: true, isNameInvalid: false, isPasswordsInvalid: true, isEmailInvalid: false, started: false})
         console.log("error: " + error);
     }
     
