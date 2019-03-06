@@ -77,6 +77,7 @@ const Register = (props) => {
       isEmailInvalid, 
       isPassword1Invalid,
       isPassword2Invalid,
+      isPasswordsInvalid,
       isSnackbarOpen,
       errorMessage,
       onClose
@@ -91,15 +92,15 @@ const Register = (props) => {
           <h4 className={classes.secondaryHeadline}>{subHeadLabel} &nbsp; 
             <Link className={classes.links} to={loginRoute}>{logInlabel}</Link>
           </h4>
-          <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSnackbarOpen}>
-            <SnackbarWrapper onClose={onClose} variant="error" className={classes.snack} message={errorMessage} />
+          <Snackbar autoHideDuration={7000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSnackbarOpen} onClose={onClose}>
+            <SnackbarWrapper variant="error" className={classes.snack} message={errorMessage} />
           </Snackbar>
           <div className={classes.textFieldsDecor}>
             <form className={classes.ltrTextField} onChange={props.handleTextFieldFunc}>
               <TextField error={isNameInvalid} id="name" value={nameValue} label="Your name" />
               <TextField error={isEmailInvalid} id="email" value={emailValue} label={emailLabel} />
-              <TextField error={isPassword1Invalid} id="password1" value={password1Value} label={passwordLabel} type='password' />
-              <TextField error={isPassword2Invalid} id="password2" value={password2Value} label="Re-enter password" type='password' />
+              <TextField error={isPassword1Invalid || isPasswordsInvalid} id="password1" value={password1Value} label={passwordLabel} type='password' />
+              <TextField error={isPassword2Invalid || isPasswordsInvalid} id="password2" value={password2Value} label="Re-enter password" type='password' />
             </form>
             <Button color="secondary" variant="contained" onClick={props.registerFunc}>{signUpLabel}</Button>
           </div>

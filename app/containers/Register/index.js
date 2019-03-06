@@ -1,4 +1,5 @@
 import React from 'react';
+import * as R from 'ramda';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { session } from '../../actions'
@@ -35,9 +36,22 @@ class RegisterContainer extends React.Component {
     verifyUser = (user) => {
         this.props.firebase.sendEmailVerification();
         this.setState({user});
+        console.log("user: " + user);
     }
 
-    register = async () => {
+    handleError = (error) => {
+        R.includes("email",error.message) ? 
+        this.setState({errorMessage: error.message, isSnackbarOpen: true, isEmailInvalid: true, isPasswordsInvalid: false}) : 
+        this.setState({errorMessage: error.message, isSnackbarOpen: true, isPasswordsInvalid: true, isEmailInvalid: false})
+        console.log("error: " + error);
+    }
+
+    signUp = async (email, password) => {
+        const [error, user] = await to(this.props.firebase.signUp(email,password));
+        error ? this.handleError(error) : this.verifyUser(user); //this.setState({user});
+    }
+
+    validateTextFields = async () => {
         const {
             name,
             email,
@@ -47,22 +61,21 @@ class RegisterContainer extends React.Component {
         const isNameInvalid = name === '';
         const isEmailInvalid = email === ''; 
         const isPasswordsInvalid = password1 !== password2;
-        const isPassword1Invalid = password1 === '' || isPasswordsInvalid;
-        const isPassword2Invalid = password2 === '' || isPasswordsInvalid;
+        const isPassword1Invalid = password1 === '';
+        const isPassword2Invalid = password2 === '';
         const isInvalid = isNameInvalid || isEmailInvalid || isPassword1Invalid || isPassword2Invalid || isPasswordsInvalid;
-        if(!isInvalid)
-        {
-            const [error, user] = await to(this.props.firebase.signUp(email,password1));
-            error ? this.setState({errorMessage: error.message, isSnackbarOpen: true}) : this.verifyUser(user); //this.setState({user});
-            console.log(user);
-        }
-        this.setState({
-            isNameInvalid,
-            isEmailInvalid,
-            isPassword1Invalid,
-            isPassword2Invalid,
-            isPasswordsInvalid
-        })
+        const errorMessage = isNameInvalid ? "oops.. enter your name" : isEmailInvalid ? "oops.. enter your email" :
+                             isPassword1Invalid ? "oops.. enter password" : isPassword2Invalid ? "oops.. enter password" :
+                              "oops.. Those passwords didn't match. Try again."
+        !isInvalid ? this.signUp(email, password1) : this.setState({
+                                                            isNameInvalid,
+                                                            isEmailInvalid,
+                                                            isPassword1Invalid,
+                                                            isPassword2Invalid,
+                                                            isPasswordsInvalid,
+                                                            errorMessage,
+                                                            isSnackbarOpen: true
+                                                            })
     }
     render() {
         return (
@@ -73,11 +86,12 @@ class RegisterContainer extends React.Component {
                 emailValue={this.state.email}
                 password1Value={this.state.password1}
                 password2Value={this.state.password2}
-                registerFunc={this.register}
+                registerFunc={this.validateTextFields}
                 isNameInvalid={this.state.isNameInvalid}
                 isEmailInvalid={this.state.isEmailInvalid}
                 isPassword1Invalid={this.state.isPassword1Invalid}
                 isPassword2Invalid={this.state.isPassword2Invalid}
+                isPasswordsInvalid={this.state.isPasswordsInvalid}
                 isSnackbarOpen={this.state.isSnackbarOpen}
                 errorMessage={this.state.errorMessage}
                 onClose={this.handleCloseSnackbar}
