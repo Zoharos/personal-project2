@@ -1,8 +1,9 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Login from '../../components/PageComponents/Login';
 import to from 'await-to-js';
-import { withFirebase } from '../../components/firebase'
-import { generalErrorMessage } from './constants';
+import { withFirebase } from '../../components/firebase';
+import { generalErrorMessage, notVerifiedMessage } from './constants';
 
 class LoginContainer extends React.Component {
     state = {
@@ -11,10 +12,13 @@ class LoginContainer extends React.Component {
         isEmailInvalid: false,
         isPasswordInvalid: false,
         isSnackbarOpen: false,
-        errorMessage: ''
+        errorMessage: '',
+        started: false
     };
 
     handleCloseSnackbar = () => this.setState({isSnackbarOpen: false});
+
+    handleRedirect = () => this.props.history.push('/');
 
     handleTextFields = (textFieldObj) => {
         const fields = this.state;
@@ -27,10 +31,15 @@ class LoginContainer extends React.Component {
         this.setState({
             isEmailInvalid: false,
             isPasswordInvalid: false,
-            isSnackbarOpen: false
+            isSnackbarOpen: false,
+            started: false
         })
         console.log(response);
+        this.handleRedirect();
     }
+
+    checkEmailVerification = (response) => 
+        response.user.emailVerified ? this.handleToken(response) : this.setState({errorMessage: notVerifiedMessage, isSnackbarOpen: true, started: false, isEmailInvalid: false, isPasswordInvalid: false});
 
     handleError = (error) => {
         this.setState({errorMessage: generalErrorMessage, isSnackbarOpen: true, isEmailInvalid: false, isPasswordInvalid: false})
@@ -38,8 +47,9 @@ class LoginContainer extends React.Component {
     }
 
     signIn = async (email, password) => {
+        this.setState({started: true});
         const [error, response] = await to(this.props.firebase.signIn(email, password));
-        error ? this.handleError(error) : this.handleToken(response);
+        error ? this.handleError(error) : this.checkEmailVerification(response);
     }
 
     validateTextFields = async () => {
@@ -69,6 +79,7 @@ class LoginContainer extends React.Component {
                 isSnackbarOpen={this.state.isSnackbarOpen}
                 errorMessage={this.state.errorMessage}
                 onClose={this.handleCloseSnackbar}
+                started={this.state.started}
                 />
             </div>
         )

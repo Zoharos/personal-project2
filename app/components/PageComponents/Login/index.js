@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { Helmet } from 'react-helmet';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarWrapper from '../../InPageComponents/SnackbarWrapper';
 import TextField from '@material-ui/core/TextField';
@@ -71,6 +72,10 @@ const styles = theme => ({
       font: 'unset',
       marginBottom: 10
     },
+    circularLoading: {
+      display: 'block',
+      margin: 'auto'
+    },
     hide: {
       display: 'none'
     }
@@ -85,7 +90,8 @@ const Login = (props) => {
       isPasswordInvalid,
       isSnackbarOpen,
       onClose,
-      errorMessage
+      errorMessage,
+      started
     } = props;
     return (
         <div>
@@ -104,7 +110,8 @@ const Login = (props) => {
               <TextField error={isPasswordInvalid} id="password" value={passwordValue} label={passwordLabel} type='password' />
               <h4 className={!isEmailInvalid && isPasswordInvalid ? classes.textFieldError : classes.hide}>{errorMessage}</h4>
             </form>
-            <Button color="secondary" variant="contained" onClick={props.loginFunc}>{signinLabel}</Button>
+            <Button disabled={started} color="secondary" variant="contained" onClick={props.loginFunc}>{signinLabel}</Button>
+            {started && <CircularProgress size={24} className={classes.circularLoading} />}
             <Link className={classes.links} to={forgotPasswordRoute}>{forgotLabel}</Link>
           </div>
           <Snackbar autoHideDuration={7000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSnackbarOpen} onClose={onClose}>
