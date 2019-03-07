@@ -31,6 +31,8 @@ class firebase {
     sendEmailVerification = () => this.auth.currentUser.sendEmailVerification();
 
     updateUser = (name) => this.auth.currentUser.updateProfile({displayName: name});
+
+    getUser = () => this.auth.currentUser;
 };
 
 export default firebase;

@@ -42,13 +42,15 @@ const styles = theme => ({
 });
 
 const Home = (props) => {
-    const { classes } = props;
+    const { classes, displayName } = props;
     return (
         <div>
           <Helmet>
             <title>{siteTitle}</title>
           </Helmet>
-          <AppBar />
+          <AppBar 
+          name={displayName}
+          />
           {/* <DarkScreen /> */}
         </div>
     );

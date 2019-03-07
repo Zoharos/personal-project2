@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { rootRoute, loginRoute, forgotPasswordRoute, registerRoute } from './constants'
-import Home from './components/PageComponents/Home';
+import Home from './containers/Home';
 import Login from './containers/Login';
 import ForgotPassword from './containers/ForgotPassword';
 import Register from './containers/Register';

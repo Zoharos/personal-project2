@@ -107,7 +107,7 @@ const styles = theme => ({
 });
 
 const NavBar = (props) => {
-  const { classes } = props;
+  const { classes, name } = props;
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.searchNav}>
@@ -129,16 +129,21 @@ const NavBar = (props) => {
       </AppBar>
       <div className={classes.bottomNavBar}>
         <div className={classes.loginNav}>
-          <NavLink to={loginRoute} className={classes.noUnderline}>
-            <Button color="secondary" className={classes.bottomNavBarButton}>
-              {signInButton}
-            </Button>
-          </NavLink>
-          <NavLink to={registerRoute} className={classes.noUnderline}>
-            <Button color="secondary" className={classes.bottomNavBarButton}>
-              {signUpButton}
-            </Button>
-          </NavLink>
+        { name ? <Button color="secondary" className={classes.noUnderline}>{name}</Button> :
+                        <React.Fragment>
+                          <NavLink to={loginRoute} className={classes.noUnderline}>
+                            <Button color="secondary" className={classes.bottomNavBarButton}>
+                              {signInButton}
+                            </Button>
+                          </NavLink>
+                          <NavLink to={registerRoute} className={classes.noUnderline}>
+                            <Button color="secondary" className={classes.bottomNavBarButton}>
+                              {signUpButton}
+                            </Button>
+                          </NavLink>
+                        </React.Fragment>
+
+        }
           <NavLink to={registerRoute} className={classes.noUnderline}>
             <Button color="secondary" className={classes.bottomNavBarButton}>
               <CartIcon />
