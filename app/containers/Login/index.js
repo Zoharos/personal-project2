@@ -1,9 +1,8 @@
 import React from 'react';
-import * as R from 'ramda';
 import Login from '../../components/PageComponents/Login';
-import { auth } from '../../components/MaterialComponents';
 import to from 'await-to-js';
 import { withFirebase } from '../../components/firebase'
+import { generalErrorMessage } from './constants';
 
 class LoginContainer extends React.Component {
     state = {
@@ -12,8 +11,7 @@ class LoginContainer extends React.Component {
         isEmailInvalid: false,
         isPasswordInvalid: false,
         isSnackbarOpen: false,
-        errorMessage: '',
-        user: {},
+        errorMessage: ''
     };
 
     handleCloseSnackbar = () => this.setState({isSnackbarOpen: false});
@@ -25,10 +23,6 @@ class LoginContainer extends React.Component {
     }
 
     handleToken = (response) => {
-        // localStorage.setItem('token',JSON.stringify(response.data.token));
-        // localStorage.setItem('email',JSON.stringify(response.data.email));
-        // auth.authenticate();
-        // axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
         localStorage.setItem('name',JSON.stringify(response.user.displayName));
         this.setState({
             isEmailInvalid: false,
@@ -39,10 +33,8 @@ class LoginContainer extends React.Component {
     }
 
     handleError = (error) => {
-        R.includes("email",error.message) ? 
-        this.setState({errorMessage: error.message, isSnackbarOpen: true, isEmailInvalid: true, isPasswordInvalid: false}) : 
-        this.setState({errorMessage: error.message, isSnackbarOpen: true, isPasswordInvalid: true, isEmailInvalid: false})
-        console.log("error: " + error);
+        this.setState({errorMessage: generalErrorMessage, isSnackbarOpen: true, isEmailInvalid: false, isPasswordInvalid: false})
+        console.log("error: " + error.code);
     }
 
     signIn = async (email, password) => {
@@ -55,7 +47,7 @@ class LoginContainer extends React.Component {
         const isEmailInvalid = email === '';
         const isPasswordInvalid = password === ''; 
         const isInvalid = isEmailInvalid || isPasswordInvalid;
-        const errorMessage = isEmailInvalid ? "oops.. enter your email" : "oops.. enter your password"
+        const errorMessage = isEmailInvalid ? "Please enter your email" : "Please enter your password"
         !isInvalid ? this.signIn(email, password) : this.setState({
                                                     isEmailInvalid, 
                                                     isPasswordInvalid,
@@ -82,8 +74,5 @@ class LoginContainer extends React.Component {
         )
     }
 }
-// const mapDispatchToProps = (dispatch) => {
-//     login: (user) => dispatch(session(user));
-// }
 
 export default withFirebase(LoginContainer);

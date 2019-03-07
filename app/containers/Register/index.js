@@ -1,7 +1,6 @@
 import React from 'react';
 import * as R from 'ramda';
 import Register from '../../components/PageComponents/Register';
-import { auth } from '../../components/MaterialComponents';
 import to from 'await-to-js';
 import { withFirebase } from '../../components/firebase'
 
@@ -77,9 +76,9 @@ class RegisterContainer extends React.Component {
         const isPassword1Invalid = password1 === '';
         const isPassword2Invalid = password2 === '';
         const isInvalid = isNameInvalid || isEmailInvalid || isPassword1Invalid || isPassword2Invalid || isPasswordsInvalid;
-        const errorMessage = isNameInvalid ? "oops.. enter your name" : isEmailInvalid ? "oops.. enter your email" :
-                             isPassword1Invalid ? "oops.. enter password" : isPassword2Invalid ? "oops.. enter password" :
-                              "oops.. Those passwords didn't match. Try again."
+        const errorMessage = isNameInvalid ? "Please enter your name" : isEmailInvalid ? "Please enter your email" :
+                             isPassword1Invalid ? "Please enter password" : isPassword2Invalid ? "Please enter password" :
+                              "Those passwords didn't match. Please Try again."
         !isInvalid ? this.signUp(email, password1, name) : this.setState({
                                                             isNameInvalid,
                                                             isEmailInvalid,

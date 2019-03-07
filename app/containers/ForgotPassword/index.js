@@ -1,8 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 import ForgotPassword from '../../components/PageComponents/ForgotPassword';
-import { auth } from '../../components/MaterialComponents';
 import { forgotApi } from './constants';
 
 class ForgotPasswordContainer extends React.Component {

@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { blackLogo } from '../../../imports';
 import { rootRoute, registerRoute, forgotPasswordRoute } from '../../../constants';
-import { passwordLabel, emailLabel, pageTitle, signinLabel, subHeadLabel, createAccountlabel, forgotLabel } from './constants'
+import { passwordLabel, emailLabel, pageTitle, signinLabel, subHeadLabel, createAccountlabel, forgotLabel, snackbarErrorMessage } from './constants'
 
 const styles = theme => ({
     logo: {
@@ -64,6 +64,16 @@ const styles = theme => ({
       margin: 'auto',
       textAlign: 'center'
     },
+    textFieldError: {
+      margin: 0,
+      textAlign: 'left',
+      color: 'red',
+      font: 'unset',
+      marginBottom: 10
+    },
+    hide: {
+      display: 'none'
+    }
 });
 
 const Login = (props) => {
@@ -90,13 +100,15 @@ const Login = (props) => {
           <div className={classes.textFieldsDecor}>
             <form className={classes.ltrTextField} onChange={props.handleTextFieldFunc}>
               <TextField error={isEmailInvalid} id="email" value={emailValue} label={emailLabel} />
+              <h4 className={isEmailInvalid ? classes.textFieldError : classes.hide}>{errorMessage}</h4>
               <TextField error={isPasswordInvalid} id="password" value={passwordValue} label={passwordLabel} type='password' />
+              <h4 className={!isEmailInvalid && isPasswordInvalid ? classes.textFieldError : classes.hide}>{errorMessage}</h4>
             </form>
             <Button color="secondary" variant="contained" onClick={props.loginFunc}>{signinLabel}</Button>
             <Link className={classes.links} to={forgotPasswordRoute}>{forgotLabel}</Link>
           </div>
           <Snackbar autoHideDuration={7000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSnackbarOpen} onClose={onClose}>
-            <SnackbarWrapper variant="error" className={classes.snack} message={errorMessage} />
+            <SnackbarWrapper variant="error" className={classes.snack} message={!isEmailInvalid && !isPasswordInvalid ? errorMessage : snackbarErrorMessage} />
           </Snackbar>
         </div>
     );

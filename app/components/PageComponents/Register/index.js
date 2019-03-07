@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { blackLogo } from '../../../imports';
 import { rootRoute, loginRoute } from '../../../constants';
-import { passwordLabel, emailLabel, pageTitle, signUpLabel, subHeadLabel, logInlabel, successMessage } from './constants'
+import { passwordLabel, emailLabel, pageTitle, signUpLabel, subHeadLabel, logInlabel, snackbarSuccessMessage, snackbarErrorMessage } from './constants'
 
 const styles = theme => ({
     logo: {
@@ -65,6 +65,16 @@ const styles = theme => ({
       margin: 'auto',
       textAlign: 'center',
     },
+    textFieldError: {
+      margin: 0,
+      textAlign: 'left',
+      color: 'red',
+      font: 'unset',
+      marginBottom: 10
+    },
+    hide: {
+      display: 'none'
+    }
 });
 
 const Register = (props) => {
@@ -97,17 +107,21 @@ const Register = (props) => {
             <Link className={classes.links} to={loginRoute}>{logInlabel}</Link>
           </h4>
           <Snackbar autoHideDuration={9000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSnackbarOpen} onClose={closeErrorSnackbar}>
-            <SnackbarWrapper variant="error" className={classes.snack} message={errorMessage} />
+            <SnackbarWrapper variant="error" className={classes.snack} message={snackbarErrorMessage} />
           </Snackbar>
           <Snackbar autoHideDuration={9000} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={isSuccessSnackbarOpen} onClose={closeSuccessSnackbar}>
-            <SnackbarWrapper variant="success" className={classes.snack} message={successMessage + emailValue} />
+            <SnackbarWrapper variant="success" className={classes.snack} message={snackbarSuccessMessage + emailValue} />
           </Snackbar>
           <div className={classes.textFieldsDecor}>
             <form className={classes.ltrTextField} onChange={props.handleTextFieldFunc}>
               <TextField error={isNameInvalid} id="name" value={nameValue} label="Your name" />
+              <h4 className={isNameInvalid ? classes.textFieldError : classes.hide}>{errorMessage}</h4>
               <TextField error={isEmailInvalid} id="email" value={emailValue} label={emailLabel} />
+              <h4 className={!isNameInvalid && isEmailInvalid ? classes.textFieldError : classes.hide}>{errorMessage}</h4>
               <TextField error={isPassword1Invalid || isPasswordsInvalid} id="password1" value={password1Value} label={passwordLabel} type='password' />
+              <h4 className={(!isNameInvalid && !isEmailInvalid) && (isPassword1Invalid || isPasswordsInvalid) ? classes.textFieldError : classes.hide}>{errorMessage}</h4>
               <TextField error={isPassword2Invalid || isPasswordsInvalid} id="password2" value={password2Value} label="Re-enter password" type='password' />
+              <h4 className={(!isNameInvalid && !isEmailInvalid) && (isPassword2Invalid || isPasswordsInvalid) ? classes.textFieldError : classes.hide}>{errorMessage}</h4>
             </form>
             <Button disabled={started} color="secondary" variant="contained" onClick={props.registerFunc}>{signUpLabel}</Button>
             {started && <CircularProgress size={24} />}

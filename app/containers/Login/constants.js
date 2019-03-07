@@ -1,3 +1,3 @@
 import { apiURL } from '../../constants';
 
-export const loginApi = apiURL + "login";
+export const generalErrorMessage = "oops.. Wrong email or password";
