@@ -42,7 +42,7 @@ class LoginContainer extends React.Component {
         response.user.emailVerified ? this.handleToken(response) : this.setState({errorMessage: notVerifiedMessage, isSnackbarOpen: true, started: false, isEmailInvalid: false, isPasswordInvalid: false});
 
     handleError = (error) => {
-        this.setState({errorMessage: generalErrorMessage, isSnackbarOpen: true, isEmailInvalid: false, isPasswordInvalid: false})
+        this.setState({errorMessage: generalErrorMessage, started: false, isSnackbarOpen: true, isEmailInvalid: false, isPasswordInvalid: false})
         console.log("error: " + error.code);
     }
 
